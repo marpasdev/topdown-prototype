@@ -6,6 +6,7 @@ namespace TopdownPrototype
     internal enum WorldObjectType : byte
     {
         Void = 0,
-        StoneLarge = 1
+        StoneLarge = 1,
+        SpruceTree = 2
     }
 }

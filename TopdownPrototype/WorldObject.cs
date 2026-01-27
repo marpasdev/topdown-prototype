@@ -57,8 +57,10 @@ namespace TopdownPrototype
         public void Draw(SpriteBatch spriteBatch, int tileSize)
         {
             if (Info.Texture == null) { return; }
+            // specifying the layer depth was supposed to fix an issue, instead it broke it even more
             spriteBatch.Draw(Info.Texture, tileSize * new Vector2((float)AnchorTile.X + Info.DrawOffset.X,
-                (float)AnchorTile.Y + Info.DrawOffset.Y), Color.White);
+                (float)AnchorTile.Y + Info.DrawOffset.Y), null, Color.White, 0f, Vector2.Zero, 1f,
+                SpriteEffects.None, -0.0f);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System;
 
 namespace TopdownPrototype
 {
@@ -39,6 +40,23 @@ namespace TopdownPrototype
             stone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneLarge);
             stone.GetPlaced(OccupancyGrid, WorldObjects);
 
+            Random random = new Random();
+
+            for (int y = 10; y < Height - 20; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    if (random.Next(20) == 1)
+                    {
+                        WorldObject tree = new WorldObject(new Point(x, y));
+                        tree.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceTree);
+                        tree.GetPlaced(OccupancyGrid, WorldObjects);
+                    }
+                }
+            }
+
+            WorldObjects.Sort(new RenderOrderComparer());
+
         }
 
         // TODO: split into drawing for ground, world objects and terrain
@@ -46,8 +64,8 @@ namespace TopdownPrototype
         {
             // render distance
             // TODO: remove hardcoded values, maybe evaluate it based on the screen resolution etc.
-            int renderDistX = 3;
-            int renderDistY = 3;
+            int renderDistX = 10;
+            int renderDistY = 7;
             Vector2 maxBound = new Vector2(Width, Height);
             Vector2 start = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 - renderDistX, playerPosition.Y / TileSize - renderDistX),

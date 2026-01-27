@@ -30,6 +30,13 @@ namespace TopdownPrototype
             };
             stoneLarge.OccupiedTiles.Add(new Point(1, 0));
             worldObjectInfo.Add(stoneLarge);
+
+            WorldObjectInfo spruce = new WorldObjectInfo(2)
+            {
+                Texture = Content.Load<Texture2D>("spruce"),
+                DrawOffset = new Vector2(-1, -4)
+            };
+            worldObjectInfo.Add(spruce);
         }
 
         public static WorldObjectInfo GetInfo(int worldObjectID)
