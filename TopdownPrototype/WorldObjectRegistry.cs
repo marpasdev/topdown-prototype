@@ -1,0 +1,40 @@
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+
+namespace TopdownPrototype
+{
+    internal static class WorldObjectRegistry
+    {
+        // maybe a better name??
+        private static List<WorldObjectInfo> worldObjectInfo;
+        public static ContentManager Content { get; set; }
+
+        static WorldObjectRegistry()
+        {
+            worldObjectInfo = new List<WorldObjectInfo>();
+        }
+
+        public static void Load()
+        {
+            // serves as invisible barrier
+            worldObjectInfo.Add(new WorldObjectInfo(0)
+            {
+                Texture = null
+            });
+            WorldObjectInfo stoneLarge = new WorldObjectInfo(1)
+            {
+                Texture = Content.Load<Texture2D>("stone_large"),
+                DrawOffset = new Vector2(0, -1)
+            };
+            stoneLarge.OccupiedTiles.Add(new Point(1, 0));
+            worldObjectInfo.Add(stoneLarge);
+        }
+
+        public static WorldObjectInfo GetInfo(int worldObjectID)
+        {
+            return worldObjectInfo[worldObjectID];
+        }
+    }
+}

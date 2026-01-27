@@ -1,0 +1,66 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace TopdownPrototype
+{
+    internal class Player
+    {
+        public Vector2 Position { get; set; }
+        public Texture2D Texture { get; set; }
+        public float Speed { get; set; } = 100f;
+        public float RunMultiplier { get; set; } = 1.5f;
+
+        public void Move(float deltaTime)
+        {
+            KeyboardState ks = Keyboard.GetState();
+
+            Vector2 direction = Vector2.Zero;
+
+            if (ks.IsKeyDown(Keys.W))
+            {
+                direction.Y -= 1;
+            }
+            if (ks.IsKeyDown(Keys.S))
+            {
+                direction.Y += 1;
+            }
+            if (ks.IsKeyDown(Keys.A))
+            {
+                direction.X -= 1;
+            }
+            if (ks.IsKeyDown(Keys.D))
+            {
+                direction.X += 1;
+            }
+
+            if (direction != Vector2.Zero)
+            {
+                direction.Normalize();
+            }
+
+            float speed = Speed;
+
+            if (ks.IsKeyDown(Keys.LeftShift))
+            {
+                speed *= RunMultiplier;   
+            }
+            
+            Position += direction * Speed * deltaTime;
+        }
+        
+        public void Update(GameTime gameTime)
+        {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Move(deltaTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (Texture != null)
+            {
+                spriteBatch.Draw(Texture, Position, Color.White);
+            }
+        }
+    }
+}
