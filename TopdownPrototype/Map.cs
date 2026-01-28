@@ -22,7 +22,7 @@ namespace TopdownPrototype
             Height = height;
             Grid = new TileType[width, height];
 
-            // assuming this defaults to false
+            // assuming this defaults to null
             OccupancyGrid = new WorldObject[width, height];
 
             WorldObjects = new List<WorldObject>();
@@ -36,21 +36,24 @@ namespace TopdownPrototype
                 }
             }
 
-            WorldObject stone = new WorldObject(new Point(1, 1));
-            stone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneLarge);
-            stone.GetPlaced(OccupancyGrid, WorldObjects);
-
             Random random = new Random();
 
-            for (int y = 10; y < Height - 20; y++)
+            for (int y = 10; y < Height - 10; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    if (random.Next(20) == 1)
+                    int randInt = random.Next(40);
+                    if (randInt >= 1 && randInt <= 5)
                     {
                         WorldObject tree = new WorldObject(new Point(x, y));
                         tree.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceTree);
                         tree.GetPlaced(OccupancyGrid, WorldObjects);
+                    }
+                    else if (randInt == 10)
+                    {
+                        WorldObject stone = new WorldObject(new Point(x, y));
+                        stone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneLarge);
+                        stone.GetPlaced(OccupancyGrid, WorldObjects);
                     }
                 }
             }
@@ -82,7 +85,6 @@ namespace TopdownPrototype
                 }
             }
 
-            // TODO: resolve drawing in order
             for (int i = 0; i < WorldObjects.Count; i++)
             {
                 WorldObjects[i].Draw(spriteBatch, TileSize);

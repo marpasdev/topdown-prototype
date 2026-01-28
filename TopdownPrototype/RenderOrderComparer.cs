@@ -6,10 +6,10 @@ namespace TopdownPrototype
     {
         public int Compare(WorldObject obj1, WorldObject obj2)
         {
-            int yComparison = obj1.AnchorTile.X.CompareTo(obj2.AnchorTile.X);
+            int yComparison = obj1.AnchorTile.Y.CompareTo(obj2.AnchorTile.Y);
             if (yComparison == 0)
             {
-                return obj1.AnchorTile.Y.CompareTo(obj2.AnchorTile.Y);
+                return obj1.AnchorTile.X.CompareTo(obj2.AnchorTile.X);
             } else
             {
                 return yComparison;

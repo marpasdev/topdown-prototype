@@ -67,7 +67,7 @@ namespace TopdownPrototype
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.BackToFront, 
+            _spriteBatch.Begin(SpriteSortMode.Deferred, 
                 BlendState.AlphaBlend, SamplerState.PointClamp,
                 null, null, null, Camera.Transform);
 
