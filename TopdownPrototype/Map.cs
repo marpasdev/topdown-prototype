@@ -62,6 +62,14 @@ namespace TopdownPrototype
 
         }
 
+        public void DrawWorldObjects(SpriteBatch spriteBatch) 
+        {
+            for (int i = 0; i < WorldObjects.Count; i++)
+            {
+                WorldObjects[i].Draw(spriteBatch, TileSize);
+            }
+        }
+
         // TODO: split into drawing for ground, world objects and terrain
         public void Draw(SpriteBatch spriteBatch, Vector2 playerPosition)
         {
@@ -83,11 +91,6 @@ namespace TopdownPrototype
                     spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
                         , TileSize * new Vector2(x, y), Color.White);
                 }
-            }
-
-            for (int i = 0; i < WorldObjects.Count; i++)
-            {
-                WorldObjects[i].Draw(spriteBatch, TileSize);
             }
         }
     }

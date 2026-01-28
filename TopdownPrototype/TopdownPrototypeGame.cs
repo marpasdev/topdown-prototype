@@ -10,12 +10,16 @@ namespace TopdownPrototype
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        // resolution independency
+        // resolution independency and borderless window
         private RenderTarget2D renderTarget;
+        // maybe too low - there are some visible off pixels
         private const int NATIVE_WIDTH = 1280;
         private const int NATIVE_HEIGHT = 720;
         private Rectangle renderDestination;
         private bool isResizing;
+        private bool isBorderless;
+
+        private KeyboardState previousKS;
 
         private Map map;
 
@@ -28,6 +32,7 @@ namespace TopdownPrototype
             IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = NATIVE_WIDTH;
             graphics.PreferredBackBufferHeight = NATIVE_HEIGHT;
+            graphics.ApplyChanges();
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += OnResize;
         }
@@ -62,8 +67,16 @@ namespace TopdownPrototype
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            KeyboardState ks = Keyboard.GetState();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || ks.IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (ks.IsKeyDown(Keys.F11) && !previousKS.IsKeyDown(Keys.F11))
+            {
+                ToggleBorderless();
+            }
+
+            previousKS = ks;
 
             player.Update(gameTime);
 
@@ -86,6 +99,8 @@ namespace TopdownPrototype
             map.Draw(spriteBatch, player.Position);
 
             player.Draw(spriteBatch);
+
+            map.DrawWorldObjects(spriteBatch);
 
             spriteBatch.End();
 
@@ -115,6 +130,35 @@ namespace TopdownPrototype
             // pillar-boxing/letter-boxing
             renderDestination.X = (size.X - renderDestination.Width) / 2;
             renderDestination.Y = (size.Y - renderDestination.Height) / 2;
+        }
+
+        // broken when switching back to windowed
+        private void ToggleBorderless()
+        {
+            isBorderless = !isBorderless;
+
+            DisplayMode display = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
+
+            if (isBorderless)
+            {
+                Window.IsBorderless = true;
+                graphics.IsFullScreen = false;
+                graphics.PreferredBackBufferWidth = display.Width;
+                graphics.PreferredBackBufferHeight = display.Height;
+                Window.Position = Point.Zero;
+            }
+            else
+            {
+                Window.IsBorderless = false;
+                graphics.IsFullScreen = false;
+                graphics.PreferredBackBufferWidth = NATIVE_WIDTH;
+                graphics.PreferredBackBufferHeight = NATIVE_HEIGHT;
+                Window.Position = new Point((display.Width - NATIVE_WIDTH) / 2,
+                    (display.Height - NATIVE_HEIGHT) / 2);
+            }
+            graphics.ApplyChanges();
+
+            CalculateRenderDestination();
         }
 
         private void OnResize(object sender, EventArgs e)

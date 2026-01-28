@@ -8,7 +8,7 @@ namespace TopdownPrototype
     {
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; }
-        public float Speed { get; set; } = 100f;
+        public float Speed { get; set; } = 50f;
         public float RunMultiplier { get; set; } = 1.5f;
 
         public void Move(float deltaTime)
@@ -46,7 +46,7 @@ namespace TopdownPrototype
                 speed *= RunMultiplier;   
             }
             
-            Position += direction * Speed * deltaTime;
+            Position += direction * speed * deltaTime;
         }
         
         public void Update(GameTime gameTime)
