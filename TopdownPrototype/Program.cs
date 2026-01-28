@@ -1,2 +1,2 @@
-﻿using var game = new TopdownPrototype.Game1();
+﻿using var game = new TopdownPrototype.TopdownPrototypeGame();
 game.Run();
