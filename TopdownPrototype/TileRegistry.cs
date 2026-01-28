@@ -23,11 +23,11 @@ namespace TopdownPrototype
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("stone")
+                Texture = Content.Load<Texture2D>("stone")
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("dirt")
+                Texture = Content.Load<Texture2D>("dirt")
             });
             tileInfo.Add(new TileInfo()
             {
@@ -35,23 +35,23 @@ namespace TopdownPrototype
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("gravel")
+                Texture = Content.Load<Texture2D>("gravel")
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("sand")
+                Texture = Content.Load<Texture2D>("sand")
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("water")
+                Texture = Content.Load<Texture2D>("water")
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("mud")
+                Texture = Content.Load<Texture2D>("mud")
             });
             tileInfo.Add(new TileInfo()
             {
-                //Texture = Content.Load<Texture2D>("path")
+                Texture = Content.Load<Texture2D>("path")
             });
         }
 
