@@ -78,11 +78,11 @@ namespace TopdownPrototype
 
             previousKS = ks;
 
-            player.Update(gameTime);
+            player.Update(gameTime, map);
 
             Vector2 center = new Vector2(player.Position.X + player.Texture.Width / 2, 
                 player.Position.Y + player.Texture.Height / 2);
-            Camera.Update(gameTime, center);
+            Camera.Update(gameTime, center, map);
 
             base.Update(gameTime);
         }

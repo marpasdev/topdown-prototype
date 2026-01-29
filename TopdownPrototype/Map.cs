@@ -123,8 +123,11 @@ namespace TopdownPrototype
         {
             // render distance
             // TODO: remove hardcoded values, maybe evaluate it based on the screen resolution etc.
-            int renderDistX = 10;
-            int renderDistY = 7;
+            // funny how this ended up being 16 by 9, I guess it's the aspect ratio after all
+            // this needs to update the values based on zoom level and the player's position
+            // if the player is in the world's corner, the radius needs to be bigger
+            int renderDistX = 16;
+            int renderDistY = 9;
             Vector2 maxBound = new Vector2(Width, Height);
             Vector2 start = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 - renderDistX, playerPosition.Y / TileSize - renderDistX),

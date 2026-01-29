@@ -40,11 +40,19 @@ namespace TopdownPrototype
             Zoom = MathHelper.Lerp(Zoom, targetZoom, 0.1f * zoomSpeed * deltaTime);   
         }
 
-        public static void Update(GameTime gameTime, Vector2 center)
+        private static Vector2 Clamp(Vector2 center, Map map)
+        {
+            Vector2 halfScreen = new Vector2(ScreenWidth / 2 / Zoom, ScreenHeight / 2 / Zoom);
+            Vector2 bound = new Vector2(map.Width * map.TileSize, map.Height * map.TileSize) - halfScreen;
+            return Vector2.Clamp(center, halfScreen,
+                bound);
+        }
+
+        public static void Update(GameTime gameTime, Vector2 center, Map map)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             UpdateZoom(deltaTime);
-            Transform = CreateZoom() * CreateTranslation(center);
+            Transform = CreateZoom() * CreateTranslation(Clamp(center, map));
         }
     }
 }

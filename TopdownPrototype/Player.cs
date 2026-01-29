@@ -10,6 +10,8 @@ namespace TopdownPrototype
         public Texture2D Texture { get; set; }
         public float Speed { get; set; } = 50f;
         public float RunMultiplier { get; set; } = 1.5f;
+        private int previousScrollValue = 0;
+        private MouseState previousMouseState; 
 
         public void Move(float deltaTime)
         {
@@ -48,11 +50,35 @@ namespace TopdownPrototype
             
             Position += direction * speed * deltaTime;
         }
+
+        // TODO FIX: currently breaks render distance
+        private void Zoom(float deltaTime)
+        {
+            MouseState ms = Mouse.GetState();
+
+            if (ms.ScrollWheelValue > previousScrollValue)
+            {
+                Camera.TargetZoom *= 1.1f;
+            } else if (ms.ScrollWheelValue < previousScrollValue)
+            {
+                Camera.TargetZoom /= 1.1f;
+            }
+
+            previousScrollValue = ms.ScrollWheelValue;
+        }
+
+        private void BoundPosition(Map map)
+        {
+            Position = Vector2.Clamp(Position, Vector2.Zero, map.TileSize * new Vector2(
+                map.Width, map.Height) - new Vector2(Texture.Width, Texture.Height));
+        }
         
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Map map)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Move(deltaTime);
+            Zoom(deltaTime);
+            BoundPosition(map);
         }
 
         public void Draw(SpriteBatch spriteBatch)
