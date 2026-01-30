@@ -9,18 +9,37 @@ namespace TopdownPrototype
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        // maybe rename to Tiles or TileGrid?
-        public TileType[,] Grid { get; set; }
         // 32 pixelart looks stunning, maybe go with that in the future?
         public int TileSize { get; set; } = 16;
+        // maybe rename to Tiles or TileGrid?
+        public TileType[,] Grid { get; set; }
+        //***** elevation - slopes and surfaces *****
+        // format: [level, x, y]
+        // would changing it to [x, y, z] be a reasonable thing?
+        // maximum number of elevation levels
+        public int MaxLevels { get; set; }
+        // maybe merge with TileGrid later? Or possibly let it be this way, to be compatible with slopes
+        public TileType[,,] SurfaceGrid { get; set; }
+        // grid storing the type of elevated slope
+        public SlopeType[,,] SlopeGrid { get; set; }
+        // stores the top elevation for each coordinate
+        public int[,] Elevation { get; private set; }
         public WorldObject[,] OccupancyGrid { get; set; }
         public List<WorldObject> WorldObjects { get; set; }
 
-        public Map(int width, int height)
+        public Map(int width, int height, int maxElevationLevels)
         {
             Width = width;
             Height = height;
             Grid = new TileType[width, height];
+
+            // replace the hardcoded number at the end with something else
+            maxElevationLevels = Math.Clamp(maxElevationLevels, 0, 10);
+            MaxLevels = maxElevationLevels;
+
+            SurfaceGrid = new TileType[MaxLevels, Width, Height];
+            SlopeGrid = new SlopeType[MaxLevels, Width, Height];
+            Elevation = new int[Width, Height];
 
             // assuming this defaults to null
             OccupancyGrid = new WorldObject[width, height];
@@ -35,7 +54,6 @@ namespace TopdownPrototype
                     Grid[x, y] = TileType.Grass;
                 }
             }
-
 
             // make seed variable
             FastNoiseLite noise = new FastNoiseLite();
@@ -76,6 +94,9 @@ namespace TopdownPrototype
                     else if (value > 0.8f && value <= 1.0f)
                     {
                         Grid[x, y] = TileType.Stone;
+                        SlopeGrid[0, x, y] = SlopeType.Stone;
+                        Elevation[x, y] = 1;
+                        SurfaceGrid[0, x, y] = TileType.Mud;
                     }
                 }
             }
@@ -87,6 +108,7 @@ namespace TopdownPrototype
                 for (int x = 0; x < Width; x++)
                 {
                     if (Grid[x, y] == TileType.Water) { continue; }
+                    if (Grid[x, y] == TileType.Stone) { continue; }
 
                     int randInt = random.Next(40);
                     if (randInt >= 1 && randInt <= 5)
@@ -139,8 +161,28 @@ namespace TopdownPrototype
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
                 {
-                    spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
-                        , TileSize * new Vector2(x, y), Color.White);
+                    if (Elevation[x, y] > 0) 
+                    {
+                        // draw surface
+                        spriteBatch.Draw(TileRegistry.GetInfo((int)SurfaceGrid[Elevation[x, y] - 1, x, y]).Texture
+                            , TileSize * new Vector2(x, y - 1), Color.White);
+
+                        // draw slope
+                        if (y != Height - 1)
+                        {
+                            if (Elevation[x, y + 1] < Elevation[x, y])
+                            {
+                                spriteBatch.Draw(TileRegistry.GetSlopeInfo((int)SlopeGrid[
+                                    Elevation[x, y] - 1, x, y])
+                                    .Texture, TileSize * new Vector2(x, y), Color.White);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
+                            , TileSize * new Vector2(x, y), Color.White);
+                    }
                 }
             }
         }

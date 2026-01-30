@@ -58,9 +58,10 @@ namespace TopdownPrototype
             CalculateRenderDestination();
 
             TileRegistry.Load();
+            TileRegistry.LoadSlopes();
             WorldObjectRegistry.Load();
 
-            map = new Map(100, 100);
+            map = new Map(100, 100, 1);
 
             player.Texture = Content.Load<Texture2D>("player");
         }
