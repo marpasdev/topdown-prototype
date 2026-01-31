@@ -21,6 +21,7 @@ namespace TopdownPrototype
             }
         }
         private Vector2 previousPosition;
+        public Vector2 Feet => new Vector2(Position.X + 6, Position.Y + 27);
         // elevation of the player 
         private int elevation = 0;
         public required Texture2D Texture { get; set; }
@@ -129,7 +130,9 @@ namespace TopdownPrototype
             {
                 for (int x = start.X; x <= end.X; x++)
                 {
-                    if (map.Elevation[x, y] != elevation)
+                    // will this certainly not cause any strange behaviour regarding null here??
+                    if (map.Elevation[x, y] != elevation || (map.OccupancyGrid[x, y] != null &&
+                        !map.OccupancyGrid[x, y].Info.Walkable))
                     {
                         RectangleF tileRect = new RectangleF(x * map.TileSize, y * map.TileSize,
                             map.TileSize, map.TileSize);
@@ -165,7 +168,6 @@ namespace TopdownPrototype
                     }
                 }
             }
-            // world objects
         }
         
         public void Update(GameTime gameTime, Map map)

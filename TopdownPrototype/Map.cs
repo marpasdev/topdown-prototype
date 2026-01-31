@@ -131,16 +131,8 @@ namespace TopdownPrototype
 
         }
 
-        public void DrawWorldObjects(SpriteBatch spriteBatch) 
-        {
-            for (int i = 0; i < WorldObjects.Count; i++)
-            {
-                WorldObjects[i].Draw(spriteBatch, TileSize);
-            }
-        }
-
-        // TODO: split into drawing for ground, world objects and terrain
-        public void Draw(SpriteBatch spriteBatch, Vector2 playerPosition)
+        // TODO: get rid of playerPosition param
+        public void Draw(SpriteBatch spriteBatch, Vector2 playerPosition, Player player)
         {
             // render distance
             // TODO: remove hardcoded values, maybe evaluate it based on the screen resolution etc.
@@ -156,6 +148,9 @@ namespace TopdownPrototype
             Vector2 end = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 + renderDistX, playerPosition.Y / TileSize + renderDistY),
                 Vector2.Zero, maxBound);
+            Point playerPoint = new Point((int)(player.Feet.X / TileSize), (int)(player.Feet.Y / TileSize));
+            playerPoint.X = Math.Clamp(playerPoint.X, 0, Width - 1);
+            playerPoint.Y = Math.Clamp(playerPoint.Y, 0, Height - 1);
             for (int y = (int)start.Y; y < (int)end.Y; y++)
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
@@ -184,11 +179,18 @@ namespace TopdownPrototype
                         // world object
                         // TODO: needs to be moved alongside elevation, otherwise it will be drawn on top of
                         WorldObject obj = OccupancyGrid[x, y];
-                        if (obj == null) { continue; }
-                        if (obj.AnchorTile == new Point(x, y))
+                        if (obj != null)
                         {
-                            obj.Draw(spriteBatch, TileSize);
-                        }
+                            if (obj.AnchorTile == new Point(x, y))
+                            {
+                                obj.Draw(spriteBatch, TileSize);
+                            }
+                        } 
+                    }
+
+                    if (playerPoint == new Point(x, y))
+                    {
+                        player.Draw(spriteBatch);
                     }
                 }
             }

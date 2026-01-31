@@ -100,9 +100,9 @@ namespace TopdownPrototype
                 BlendState.AlphaBlend, SamplerState.PointClamp,
                 null, null, null, Camera.Transform);
 
-            map.Draw(spriteBatch, player.Position);
+            map.Draw(spriteBatch, player.Position, player);
 
-            player.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
 
             //map.DrawWorldObjects(spriteBatch);
 
@@ -154,6 +154,9 @@ namespace TopdownPrototype
             {
                 Window.IsBorderless = false;
                 graphics.IsFullScreen = false;
+                // TODO: fix
+                // currently out of order, needs to be fixed - native resolution is at fault
+                // too big for a window when back in fullscreen/window mode
                 graphics.PreferredBackBufferWidth = NATIVE_WIDTH;
                 graphics.PreferredBackBufferHeight = NATIVE_HEIGHT;
                 Window.Position = new Point((display.Width - NATIVE_WIDTH) / 2,
