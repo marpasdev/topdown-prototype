@@ -13,8 +13,11 @@ namespace TopdownPrototype
         // resolution independency and borderless window
         private RenderTarget2D renderTarget;
         // maybe too low - there are some visible off pixels
-        private const int NATIVE_WIDTH = 1280;
-        private const int NATIVE_HEIGHT = 720;
+        //private const int NATIVE_WIDTH = 1280;
+        //private const int NATIVE_HEIGHT = 720;
+        // it seems modifying the resolution also modifies the max and min zoom level
+        private const int NATIVE_WIDTH = 1920;
+        private const int NATIVE_HEIGHT = 1080;
         private Rectangle renderDestination;
         private bool isResizing;
         private bool isBorderless;
@@ -39,8 +42,6 @@ namespace TopdownPrototype
 
         protected override void Initialize()
         {
-            player = new Player();
-
             Camera.ScreenWidth = graphics.PreferredBackBufferWidth;
             Camera.ScreenHeight = graphics.PreferredBackBufferHeight;
 
@@ -63,7 +64,9 @@ namespace TopdownPrototype
 
             map = new Map(100, 100, 1);
 
-            player.Texture = Content.Load<Texture2D>("player");
+            player = new Player() {
+                Texture = Content.Load<Texture2D>("player")
+            };
         }
 
         protected override void Update(GameTime gameTime)
@@ -101,7 +104,7 @@ namespace TopdownPrototype
 
             player.Draw(spriteBatch);
 
-            map.DrawWorldObjects(spriteBatch);
+            //map.DrawWorldObjects(spriteBatch);
 
             spriteBatch.End();
 
@@ -133,7 +136,6 @@ namespace TopdownPrototype
             renderDestination.Y = (size.Y - renderDestination.Height) / 2;
         }
 
-        // broken when switching back to windowed
         private void ToggleBorderless()
         {
             isBorderless = !isBorderless;

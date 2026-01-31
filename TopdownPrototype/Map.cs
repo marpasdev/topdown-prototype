@@ -125,7 +125,6 @@ namespace TopdownPrototype
                         stone.GetPlaced(OccupancyGrid, WorldObjects);
                     }
                 }
-
             }
 
             WorldObjects.Sort(new RenderOrderComparer());
@@ -148,8 +147,8 @@ namespace TopdownPrototype
             // funny how this ended up being 16 by 9, I guess it's the aspect ratio after all
             // this needs to update the values based on zoom level and the player's position
             // if the player is in the world's corner, the radius needs to be bigger
-            int renderDistX = 16;
-            int renderDistY = 9;
+            int renderDistX = 32;
+            int renderDistY = 20;
             Vector2 maxBound = new Vector2(Width, Height);
             Vector2 start = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 - renderDistX, playerPosition.Y / TileSize - renderDistX),
@@ -182,6 +181,14 @@ namespace TopdownPrototype
                     {
                         spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
                             , TileSize * new Vector2(x, y), Color.White);
+                        // world object
+                        // TODO: needs to be moved alongside elevation, otherwise it will be drawn on top of
+                        WorldObject obj = OccupancyGrid[x, y];
+                        if (obj == null) { continue; }
+                        if (obj.AnchorTile == new Point(x, y))
+                        {
+                            obj.Draw(spriteBatch, TileSize);
+                        }
                     }
                 }
             }

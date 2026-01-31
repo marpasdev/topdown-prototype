@@ -48,7 +48,8 @@ namespace TopdownPrototype
                 objects.Add(this);
 
                 return true;
-            } else
+            } 
+            else
             {
                 return false;
             }
