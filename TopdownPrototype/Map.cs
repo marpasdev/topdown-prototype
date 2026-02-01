@@ -26,12 +26,15 @@ namespace TopdownPrototype
         public int[,] Elevation { get; private set; }
         public WorldObject[,] OccupancyGrid { get; set; }
         public List<WorldObject> WorldObjects { get; set; }
+        // rename this
+        public GroundRenderGrid TerrainRenderGrid { get; set; }
 
         public Map(int width, int height, int maxElevationLevels)
         {
             Width = width;
             Height = height;
             Grid = new TileType[width, height];
+            TerrainRenderGrid = new GroundRenderGrid(width, height);
 
             // replace the hardcoded number at the end with something else
             maxElevationLevels = Math.Clamp(maxElevationLevels, 0, 10);
@@ -96,7 +99,7 @@ namespace TopdownPrototype
                         Grid[x, y] = TileType.Stone;
                         SlopeGrid[0, x, y] = SlopeType.Stone;
                         Elevation[x, y] = 1;
-                        SurfaceGrid[0, x, y] = TileType.Mud;
+                        SurfaceGrid[0, x, y] = TileType.Gravel;
                     }
                 }
             }

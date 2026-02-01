@@ -48,6 +48,7 @@ namespace TopdownPrototype
             {
                 Texture = Content.Load<Texture2D>("water")
             });
+            /*
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("mud")
@@ -55,7 +56,7 @@ namespace TopdownPrototype
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("path")
-            });
+            });*/
         }
 
         public static void LoadSlopes()

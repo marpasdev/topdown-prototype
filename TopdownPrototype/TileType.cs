@@ -9,8 +9,8 @@
         Grass = 3,
         Gravel = 4,
         Sand = 5,
-        Water = 6,
+        Water = 6/*,
         Mud = 7,
-        Path = 8
+        Path = 8*/
     }
 }

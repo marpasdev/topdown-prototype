@@ -12,6 +12,7 @@ namespace TopdownPrototype
         public bool Walkable { get; set; } = true;
         // maybe move elsewhere later??
         //public SoundEffect WalkingSound { get; set; }
+        public int Priority { get; set; }
 
     }
 }
