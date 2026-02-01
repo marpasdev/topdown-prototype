@@ -8,6 +8,13 @@ namespace TopdownPrototype
     {
         public Point AnchorTile { get; set; }
         public WorldObjectInfo Info { get; set; }
+        public Point LeftmostTile
+        {
+            get
+            {
+                return AnchorTile + Info.LeftmostTile;
+            }
+        }
 
         public WorldObject(Point anchorTile)
         {
@@ -16,7 +23,6 @@ namespace TopdownPrototype
 
         // I am wondering where this is the correct approach. Should each WorldObject hold
         // its placing logic or should this instead be handled in a different class?
-
         public bool CanBePlaced(WorldObject[,] occupancyGrid)
         {
             foreach (Point pRel in Info.OccupiedTiles)

@@ -11,6 +11,7 @@ namespace TopdownPrototype
         public Vector2 DrawOffset { get; set; }
         public bool Walkable { get; set; } = false;
         public List<Point> OccupiedTiles { get; set; }
+        public Point LeftmostTile { get; set; }
 
         public WorldObjectInfo(int id)
         {

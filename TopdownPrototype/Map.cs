@@ -181,14 +181,14 @@ namespace TopdownPrototype
                         WorldObject obj = OccupancyGrid[x, y];
                         if (obj != null)
                         {
-                            if (obj.AnchorTile == new Point(x, y))
+                            if (obj.LeftmostTile == new Point(x, y))
                             {
                                 obj.Draw(spriteBatch, TileSize);
                             }
                         } 
                     }
 
-                    if (playerPoint == new Point(x, y))
+                    if (playerPoint == new Point(x - 1, y))
                     {
                         player.Draw(spriteBatch);
                     }
