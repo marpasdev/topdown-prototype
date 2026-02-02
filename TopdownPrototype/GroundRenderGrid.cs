@@ -21,7 +21,8 @@ namespace TopdownPrototype
             BottomRight = new RenderTile[Width, Height];
         }
 
-        public struct RenderTile
+    }
+        internal struct RenderTile
         {
             public TileType Type { get; set; }
             public int Variation { get; set; }
@@ -32,6 +33,5 @@ namespace TopdownPrototype
                 Variation = variation;
             }
         }
-    }
 
 }

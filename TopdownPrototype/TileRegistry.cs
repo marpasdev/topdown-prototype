@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace TopdownPrototype
@@ -11,6 +12,7 @@ namespace TopdownPrototype
         private static List<TileInfo> tileInfo;
         private static List<SlopeInfo> slopeInfo;
         public static ContentManager Content { get; set; }
+        public static Texture2D Atlas { get; set; }
 
         static TileRegistry()
         {
@@ -20,33 +22,41 @@ namespace TopdownPrototype
 
         public static void Load()
         {
+            Atlas = Content.Load<Texture2D>("tile_atlas");
+
             tileInfo.Add(new TileInfo()
             {
                 Texture = null
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("stone")
+                Texture = Content.Load<Texture2D>("stone"),
+                AtlasPosition = Point.Zero
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("dirt")
+                Texture = Content.Load<Texture2D>("dirt"),
+                AtlasPosition = new Point(64, 0)
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("grass")
+                Texture = Content.Load<Texture2D>("grass"),
+                AtlasPosition = new Point(128, 0)
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("gravel")
+                Texture = Content.Load<Texture2D>("gravel"),
+                AtlasPosition = new Point(0, 80)
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("sand")
+                Texture = Content.Load<Texture2D>("sand"),
+                AtlasPosition = new Point(64, 80)
             });
             tileInfo.Add(new TileInfo()
             {
-                Texture = Content.Load<Texture2D>("water")
+                Texture = Content.Load<Texture2D>("water"),
+                AtlasPosition = new Point(128, 80)
             });
             /*
             tileInfo.Add(new TileInfo()

@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobjectregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobjectregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobjectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobjectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,8 +27,8 @@
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\tileinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\terraingenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\terraingenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\tileregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,36 +39,20 @@
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\tiletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\slopeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\slopeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\slopetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\slopetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\groundrendergrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\groundrendergrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\slopeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\slopeinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobjectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobjectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\worldobjectregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\worldobjectregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\slopetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\slopetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,60 +73,16 @@
           "SelectedChildIndex": 8,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TileInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileInfo.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\TileInfo.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileInfo.cs",
-              "RelativeToolTip": "TopdownPrototype\\TileInfo.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwAAAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T18:24:10.277Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TerrainGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TerrainGenerator.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\TerrainGenerator.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TerrainGenerator.cs",
-              "RelativeToolTip": "TopdownPrototype\\TerrainGenerator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T18:13:28.593Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GroundRenderGrid.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\GroundRenderGrid.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\GroundRenderGrid.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\GroundRenderGrid.cs",
-              "RelativeToolTip": "TopdownPrototype\\GroundRenderGrid.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T18:00:31.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TileRegistry.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileRegistry.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\TileRegistry.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileRegistry.cs",
-              "RelativeToolTip": "TopdownPrototype\\TileRegistry.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwDIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T17:43:12.758Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "TileType.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileType.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\TileType.cs",
@@ -138,55 +94,21 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SlopeInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeInfo.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\SlopeInfo.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeInfo.cs",
-              "RelativeToolTip": "TopdownPrototype\\SlopeInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T09:54:15.916Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Map.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Map.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\Map.cs",
               "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Map.cs",
               "RelativeToolTip": "TopdownPrototype\\Map.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAlwGUAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAcwDMAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-26T12:50:36.742Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SlopeType.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeType.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\SlopeType.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeType.cs",
-              "RelativeToolTip": "TopdownPrototype\\SlopeType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-29T21:13:29.115Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Program.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\Program.cs",
@@ -199,20 +121,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "TopdownPrototypeGame.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TopdownPrototypeGame.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\TopdownPrototypeGame.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TopdownPrototypeGame.cs",
-              "RelativeToolTip": "TopdownPrototype\\TopdownPrototypeGame.cs",
-              "ViewState": "AgIAAJEAAAAAAAAAAAAwwHcAAAATAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "WorldObject.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObject.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\WorldObject.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObject.cs",
+              "RelativeToolTip": "TopdownPrototype\\WorldObject.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwA4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T17:31:47.07Z",
+              "WhenOpened": "2026-01-31T14:07:03.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 3,
+              "Title": "WorldObjectInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectInfo.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\WorldObjectInfo.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectInfo.cs",
+              "RelativeToolTip": "TopdownPrototype\\WorldObjectInfo.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA3wA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T16:39:04.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "WorldObjectRegistry.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectRegistry.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\WorldObjectRegistry.cs",
@@ -225,29 +160,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "WorldObject.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObject.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\WorldObject.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObject.cs",
-              "RelativeToolTip": "TopdownPrototype\\WorldObject.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TopdownPrototypeGame.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TopdownPrototypeGame.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\TopdownPrototypeGame.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TopdownPrototypeGame.cs",
+              "RelativeToolTip": "TopdownPrototype\\TopdownPrototypeGame.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAwwHcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-31T14:07:03.642Z",
+              "WhenOpened": "2026-01-27T17:31:47.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TileRegistry.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileRegistry.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\TileRegistry.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileRegistry.cs",
+              "RelativeToolTip": "TopdownPrototype\\TileRegistry.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAgwDoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T17:43:12.758Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "WorldObjectInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectInfo.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\WorldObjectInfo.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectInfo.cs",
-              "RelativeToolTip": "TopdownPrototype\\WorldObjectInfo.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAgwA0AAAAsAAAAAAAAAA==",
+              "Title": "GroundRenderGrid.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\GroundRenderGrid.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\GroundRenderGrid.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\GroundRenderGrid.cs",
+              "RelativeToolTip": "TopdownPrototype\\GroundRenderGrid.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAwwBgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T16:39:04.308Z",
+              "WhenOpened": "2026-02-01T18:00:31.27Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WorldGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldGenerator.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\WorldGenerator.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldGenerator.cs",
+              "RelativeToolTip": "TopdownPrototype\\WorldGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T18:13:28.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TileInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileInfo.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\TileInfo.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileInfo.cs",
+              "RelativeToolTip": "TopdownPrototype\\TileInfo.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T18:24:10.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SlopeType.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeType.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\SlopeType.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeType.cs",
+              "RelativeToolTip": "TopdownPrototype\\SlopeType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T21:13:29.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SlopeInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeInfo.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\SlopeInfo.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeInfo.cs",
+              "RelativeToolTip": "TopdownPrototype\\SlopeInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T09:54:15.916Z"
             },
             {
               "$type": "Document",

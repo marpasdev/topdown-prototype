@@ -49,89 +49,54 @@ namespace TopdownPrototype
 
             WorldObjects = new List<WorldObject>();
 
-            // TODO: this is basic map generating - later move it to its standalone class
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    Grid[x, y] = TileType.Grass;
-                }
-            }
-
-            // make seed variable
-            FastNoiseLite noise = new FastNoiseLite();
-            noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-            noise.SetFractalType(FastNoiseLite.FractalType.FBm);
-            noise.SetFractalOctaves(4);
-            noise.SetFrequency(0.02f);
-
-            float[,] noiseMap = new float[Width, Height];
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    float value = noise.GetNoise(x, y);
-                    // converting to [0, 1] instead of [-1, 1]
-                    noiseMap[x, y] = (value + 1) / 2;
-                }
-            }
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    float value = noiseMap[x, y];
-                    if (value <= 0.25f)
-                    {
-                        Grid[x, y] = TileType.Water;
-                    }
-                    else if (value > 0.25f && value <= 0.3f)
-                    {
-                        Grid[x, y] = TileType.Sand;
-                    }
-                    else if (value > 0.3f && value <= 0.8f)
-                    {
-                        Grid[x, y] = TileType.Grass;
-                    }
-                    else if (value > 0.8f && value <= 1.0f)
-                    {
-                        Grid[x, y] = TileType.Stone;
-                        SlopeGrid[0, x, y] = SlopeType.Stone;
-                        Elevation[x, y] = 1;
-                        SurfaceGrid[0, x, y] = TileType.Gravel;
-                    }
-                }
-            }
-
-            Random random = new Random();
-
-            for (int y = 10; y < Height - 10; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    if (Grid[x, y] == TileType.Water) { continue; }
-                    if (Grid[x, y] == TileType.Stone) { continue; }
-
-                    int randInt = random.Next(40);
-                    if (randInt >= 1 && randInt <= 5)
-                    {
-                        if (Grid[x, y] == TileType.Sand) { continue; }
-                        WorldObject tree = new WorldObject(new Point(x, y));
-                        tree.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceTree);
-                        tree.GetPlaced(OccupancyGrid, WorldObjects);
-                    }
-                    else if (randInt == 10)
-                    {
-                        WorldObject stone = new WorldObject(new Point(x, y));
-                        stone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneLarge);
-                        stone.GetPlaced(OccupancyGrid, WorldObjects);
-                    }
-                }
-            }
-
+            WorldGenerator.Generate(this);
+          
             WorldObjects.Sort(new RenderOrderComparer());
 
+            WorldGenerator.Autotile(this);
+
+        }
+
+        // works with dual grid
+        private void DrawTile(SpriteBatch spriteBatch, int x, int y)
+        {
+            TileInfo info = TileRegistry.GetInfo((int)Grid[x, y]);
+            Vector2 offset;         
+            Vector2 leftCorner;     // left corner in the tileset
+
+            // top left
+            offset = new Vector2(-TileSize / 2);
+            leftCorner = TileSize * new Vector2(TerrainRenderGrid.TopLeft[x, y].Variation % 4,
+                TerrainRenderGrid.TopLeft[x, y].Variation / 4);
+            //leftCorner = Vector2.Zero;
+            spriteBatch.Draw(TileRegistry.Atlas, new Vector2(x, y) * TileSize + offset,
+                new Rectangle(info.AtlasPosition.X + (int)leftCorner.X, info.AtlasPosition.Y + (int)leftCorner.Y,
+                TileSize, TileSize), Color.White);
+
+
+            // top right
+            offset = new Vector2(TileSize / 2, -TileSize / 2);
+            leftCorner = TileSize * new Vector2(TerrainRenderGrid.TopRight[x, y].Variation % 4,
+                TerrainRenderGrid.TopRight[x, y].Variation / 4);
+            spriteBatch.Draw(TileRegistry.Atlas, new Vector2(x, y) * TileSize + offset,
+                new Rectangle(info.AtlasPosition.X + (int)leftCorner.X, info.AtlasPosition.Y + (int)leftCorner.Y,
+                TileSize, TileSize), Color.White);
+
+            // bottom left
+            offset = new Vector2(-TileSize / 2, TileSize / 2);
+            leftCorner = TileSize * new Vector2(TerrainRenderGrid.BottomLeft[x, y].Variation % 4,
+                TerrainRenderGrid.BottomLeft[x, y].Variation / 4);
+            spriteBatch.Draw(TileRegistry.Atlas, new Vector2(x, y) * TileSize + offset,
+                new Rectangle(info.AtlasPosition.X + (int)leftCorner.X, info.AtlasPosition.Y + (int)leftCorner.Y,
+                TileSize, TileSize), Color.White);
+
+            // bottom right
+            offset = new Vector2(TileSize / 2);
+            leftCorner = TileSize * new Vector2(TerrainRenderGrid.BottomRight[x, y].Variation % 4,
+                TerrainRenderGrid.BottomRight[x, y].Variation / 4);
+            spriteBatch.Draw(TileRegistry.Atlas, new Vector2(x, y) * TileSize + offset,
+                new Rectangle(info.AtlasPosition.X + (int)leftCorner.X, info.AtlasPosition.Y + (int)leftCorner.Y,
+                TileSize, TileSize), Color.White);
         }
 
         // TODO: get rid of playerPosition param
@@ -154,6 +119,16 @@ namespace TopdownPrototype
             Point playerPoint = new Point((int)(player.Feet.X / TileSize), (int)(player.Feet.Y / TileSize));
             playerPoint.X = Math.Clamp(playerPoint.X, 0, Width - 1);
             playerPoint.Y = Math.Clamp(playerPoint.Y, 0, Height - 1);
+            
+            // drawing tiles
+            for (int y = (int)start.Y; y < (int)end.Y; y++)
+            {
+                for (int x = (int)start.X; x < (int)end.X; x++)
+                {
+                    DrawTile(spriteBatch, x, y);
+                }
+            }
+
             for (int y = (int)start.Y; y < (int)end.Y; y++)
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
@@ -177,9 +152,11 @@ namespace TopdownPrototype
                     }
                     else
                     {
-                        spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
-                            , TileSize * new Vector2(x, y), Color.White);
-                        // world object
+                        //spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
+                        //    , TileSize * new Vector2(x, y), Color.White);
+                        //DrawTile(spriteBatch, x, y);
+
+                        // world objects
                         // TODO: needs to be moved alongside elevation, otherwise it will be drawn on top of
                         WorldObject obj = OccupancyGrid[x, y];
                         if (obj != null)
