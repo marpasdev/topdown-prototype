@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\topdownprototypegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,10 +59,6 @@
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\slopetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|c:\\users\\marek\\source\\repos\\topdownprototype\\topdownprototype\\rectanglef.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49949695-3315-FA8E-439E-6833BCCDF1A2}|TopdownPrototype\\TopdownPrototype.csproj|solutionrelative:topdownprototype\\rectanglef.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -70,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,7 +82,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "TileType.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileType.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\TileType.cs",
@@ -95,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Map.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Map.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\Map.cs",
@@ -108,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Program.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\Program.cs",
@@ -121,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "WorldObject.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObject.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\WorldObject.cs",
@@ -134,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "WorldObjectInfo.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectInfo.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\WorldObjectInfo.cs",
@@ -147,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "WorldObjectRegistry.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldObjectRegistry.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\WorldObjectRegistry.cs",
@@ -160,7 +160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TopdownPrototypeGame.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TopdownPrototypeGame.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\TopdownPrototypeGame.cs",
@@ -173,7 +173,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Player.cs",
+              "RelativeDocumentMoniker": "TopdownPrototype\\Player.cs",
+              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Player.cs",
+              "RelativeToolTip": "TopdownPrototype\\Player.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAmwLQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T17:02:31.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "TileRegistry.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileRegistry.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\TileRegistry.cs",
@@ -186,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "GroundRenderGrid.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\GroundRenderGrid.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\GroundRenderGrid.cs",
@@ -199,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "WorldGenerator.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\WorldGenerator.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\WorldGenerator.cs",
@@ -212,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "TileInfo.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\TileInfo.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\TileInfo.cs",
@@ -225,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SlopeType.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeType.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\SlopeType.cs",
@@ -237,7 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "SlopeInfo.cs",
               "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\SlopeInfo.cs",
               "RelativeDocumentMoniker": "TopdownPrototype\\SlopeInfo.cs",
@@ -258,18 +271,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-30T16:34:40.54Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Player.cs",
-              "RelativeDocumentMoniker": "TopdownPrototype\\Player.cs",
-              "ToolTip": "C:\\Users\\Marek\\source\\repos\\TopdownPrototype\\TopdownPrototype\\Player.cs",
-              "RelativeToolTip": "TopdownPrototype\\Player.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAywBcAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T17:02:31.665Z"
             }
           ]
         }

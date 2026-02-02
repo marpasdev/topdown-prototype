@@ -41,6 +41,7 @@ namespace TopdownPrototype
         public float Speed { get; set; } = 50f;
         public float RunMultiplier { get; set; } = 1.5f;
         private int previousScrollValue = 0;
+        private MouseState previousMouseState;
 
         public Player()
         {
@@ -176,6 +177,8 @@ namespace TopdownPrototype
             Move(deltaTime, map);
             Zoom(deltaTime);
             BoundPosition(map);
+            Interact(map);
+            previousMouseState = Mouse.GetState();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -185,5 +188,35 @@ namespace TopdownPrototype
                 spriteBatch.Draw(Texture, Position, Color.White);
             }
         }
+
+        // testing purposes - rework later
+        public void Interact(Map map)
+        {
+            MouseState ms = Mouse.GetState();
+
+            if (ms.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                Vector2 worldPosition = Vector2.Transform(ms.Position.ToVector2(), Matrix.Invert(Camera.Transform));
+
+                Point gridPosition = new Point
+                (
+                    MathHelper.Clamp((int)(worldPosition.X / map.TileSize), 0, map.Width - 1),
+                    MathHelper.Clamp((int)(worldPosition.Y / map.TileSize), 0, map.Height - 1)
+                );
+
+                if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Grass)
+                {
+                    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Sand;
+                    WorldGenerator.Autotile(map);
+                }
+                else if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Sand)
+                {
+                    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Grass;
+                    WorldGenerator.Autotile(map);
+                }
+            }
+
+        }
+
     }
 }
