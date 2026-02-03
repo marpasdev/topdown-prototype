@@ -7,6 +7,8 @@ namespace TopdownPrototype
     {
         Void = 0,
         StoneLarge = 1,
-        SpruceTree = 2
+        SpruceTree = 2,
+        Porcino = 3,
+        FlyAmanita = 4
     }
 }

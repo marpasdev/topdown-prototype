@@ -168,6 +168,7 @@ namespace TopdownPrototype
                         } 
                     }
 
+                    playerPoint = new Point((int)(player.Feet.X / TileSize), (int)((player.Feet.Y - TileSize / 2) / TileSize));
                     if (playerPoint == new Point(x - 1, y))
                     {
                         player.Draw(spriteBatch);

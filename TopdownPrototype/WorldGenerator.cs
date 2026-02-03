@@ -86,10 +86,31 @@ namespace TopdownPrototype
                         stone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneLarge);
                         stone.GetPlaced(map.OccupancyGrid, map.WorldObjects);
                     }
+                    else if (randInt == 11)
+                    {
+                        WorldObject porcino = new WorldObject(new Point(x, y));
+                        porcino.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.Porcino);
+                        porcino.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+                    }
+                    else if (randInt == 12)
+                    {
+                        WorldObject flyAmanita = new WorldObject(new Point(x, y));
+                        flyAmanita.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.FlyAmanita);
+                        flyAmanita.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+                    }
                 }
             }
 
 
+        }
+
+        private static byte GetNeighborMask(Map map, int x, int y)
+        {
+            byte mask = 0;
+
+            
+
+            return mask;
         }
 
         public static void Autotile(Map map)

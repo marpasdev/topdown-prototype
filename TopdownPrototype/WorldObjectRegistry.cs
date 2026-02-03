@@ -39,6 +39,21 @@ namespace TopdownPrototype
                 LeftmostTile = new Point(0, 0)
             };
             worldObjectInfo.Add(spruce);
+
+            WorldObjectInfo porcino = new WorldObjectInfo(3)
+            {
+                Texture = Content.Load<Texture2D>("porcino_mushroom"),
+                Walkable = true
+            };
+            worldObjectInfo.Add(porcino);
+
+            WorldObjectInfo flyAmanita = new WorldObjectInfo(4)
+            {
+                Texture = Content.Load<Texture2D>("flyamanita"),
+                Walkable = true
+            };
+            worldObjectInfo.Add(flyAmanita);
+
         }
 
         public static WorldObjectInfo GetInfo(int worldObjectID)
