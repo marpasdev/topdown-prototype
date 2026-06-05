@@ -23,6 +23,13 @@ namespace TopdownPrototype
         private Map map;
         private Player player;
 
+        // debug and testing
+        private bool isTestMode = true;
+        private SpriteFont testFont;
+        private int fps;
+        private int frameCount;
+        private double elapsedTime;
+
         public TopdownPrototypeGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,6 +37,9 @@ namespace TopdownPrototype
             IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = windowedSize.X;
             graphics.PreferredBackBufferHeight = windowedSize.Y;
+            // vsync off
+            //IsFixedTimeStep = false;
+            //graphics.SynchronizeWithVerticalRetrace = false;
             graphics.ApplyChanges();
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += OnResize;
@@ -59,6 +69,8 @@ namespace TopdownPrototype
 
             renderTarget = new RenderTarget2D(GraphicsDevice, NATIVE_WIDTH, NATIVE_HEIGHT);
             CalculateRenderDestination();
+
+            testFont = Content.Load<SpriteFont>("testFont");
 
             TileRegistry.Load();
             TileRegistry.LoadSlopes();
@@ -90,6 +102,15 @@ namespace TopdownPrototype
 
             Camera.Update(gameTime, center, map);
 
+            frameCount++;
+            elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedTime >= 1.0)
+            {
+                fps = frameCount;
+                frameCount = 0;
+                elapsedTime = 0;
+            }
+
             base.Update(gameTime);
         }
 
@@ -116,6 +137,14 @@ namespace TopdownPrototype
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             spriteBatch.Draw(renderTarget, renderDestination, Color.White);
+
+            if (isTestMode)
+            {
+                spriteBatch.DrawString(testFont, $"FPS: {fps}",
+                    new Vector2(0, 0), Color.Red);
+                spriteBatch.DrawString(testFont, $"SelectedTile: {player.SelectedTileType.ToString()}",
+                    new Vector2(0, 20), Color.Red);
+            }
 
             spriteBatch.End();
 

@@ -41,12 +41,14 @@ namespace TopdownPrototype
         public float RunMultiplier { get; set; } = 1.5f;
         private int previousScrollValue = 0;
         private MouseState previousMouseState;
+        private KeyboardState previousKeyboardState;
         public Texture2D Texture { get; set; }
         private AnimationManager animations;
         private PlayerState previousState;
         private PlayerState state;
         public int Width { get; } = 14;
         public int Height { get; } = 28;
+        public TileType SelectedTileType { get; set; } = TileType.Grass;
 
 
         public Player(Texture2D texture, Texture2D walkingDownTexture)
@@ -214,7 +216,9 @@ namespace TopdownPrototype
             Zoom(deltaTime);
             BoundPosition(map);
             Interact(map, renderDestination);
+            SwitchSelectedTileType();
             previousMouseState = Mouse.GetState();
+            previousKeyboardState = Keyboard.GetState();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -248,20 +252,47 @@ namespace TopdownPrototype
 
                 Point gridPosition = Camera.ConvertWorldToTile(worldPosition ?? Vector2.Zero);
 
-                if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Grass)
+                //if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Grass)
+                //{
+                //    TileRegistry.GetInfo((int)TileType.Sand).PlacingSound.Play();
+                //    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Sand;
+                //    WorldGenerator.Autotile(map);
+                //}
+                //else if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Sand)
+                //{
+                //    TileRegistry.GetInfo((int)TileType.Grass).PlacingSound.Play();
+                //    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Grass;
+                //    WorldGenerator.Autotile(map);
+                //}
+                TileRegistry.GetInfo((int)SelectedTileType).PlacingSound?.Play();
+                map.Grid[gridPosition.X, gridPosition.Y] = SelectedTileType;
+                WorldGenerator.Autotile(map);
+            }
+
+        }
+
+        private void SwitchSelectedTileType()
+        {
+            KeyboardState ks = Keyboard.GetState();
+            int value = (int)SelectedTileType;
+            if (ks.IsKeyDown(Keys.Right) && !previousKeyboardState.IsKeyDown(Keys.Right))
+            {
+                value++;
+                if (value >= Enum.GetValues<TileType>().Length)
                 {
-                    TileRegistry.GetInfo((int)TileType.Sand).PlacingSound.Play();
-                    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Sand;
-                    WorldGenerator.Autotile(map);
+                    value = 0;
                 }
-                else if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Sand)
+            }
+            else if (ks.IsKeyDown(Keys.Left) && !previousKeyboardState.IsKeyDown(Keys.Left))
+            {
+                value--;
+                if (value < 0)
                 {
-                    TileRegistry.GetInfo((int)TileType.Grass).PlacingSound.Play();
-                    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Grass;
-                    WorldGenerator.Autotile(map);
+                    value = Enum.GetValues<TileType>().Length - 1;
                 }
             }
 
+            SelectedTileType = (TileType)value;
         }
 
     }
