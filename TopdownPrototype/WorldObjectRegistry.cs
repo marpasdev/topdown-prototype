@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace TopdownPrototype
@@ -54,6 +54,23 @@ namespace TopdownPrototype
             };
             worldObjectInfo.Add(flyAmanita);
 
+            WorldObjectInfo oak = new WorldObjectInfo(5)
+            {
+                Texture = Content.Load<Texture2D>("oak"),
+                Walkable = false,
+                DrawOffset = new Vector2(-1, -3),
+                LeftmostTile = new Point(0, 0)
+            };
+            worldObjectInfo.Add(oak);
+
+            WorldObjectInfo birch = new WorldObjectInfo(6)
+            {
+                Texture = Content.Load<Texture2D>("birch"),
+                Walkable = false,
+                DrawOffset = new Vector2(-1, -4),
+                LeftmostTile = new Point(0, 0)
+            };
+            worldObjectInfo.Add(birch);
         }
 
         public static WorldObjectInfo GetInfo(int worldObjectID)

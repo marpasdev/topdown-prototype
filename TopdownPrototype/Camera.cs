@@ -21,12 +21,14 @@ namespace TopdownPrototype
         }
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight { get; set; }
+        public static int NativeScreenWidth { get; set; }
+        public static int NativeScreenHeight { get; set; }
         private static float zoomSpeed = 100;
 
         private static Matrix CreateTranslation(Vector2 center)
         {
-            float dx = ((ScreenWidth / 2) - center.X * Zoom);
-            float dy = ((ScreenHeight / 2) - center.Y * Zoom);
+            float dx = ((NativeScreenWidth / 2) - center.X * Zoom);
+            float dy = ((NativeScreenHeight / 2) - center.Y * Zoom);
             return Matrix.CreateTranslation(new Vector3(dx, dy, 0));
         }
 
@@ -42,7 +44,7 @@ namespace TopdownPrototype
 
         private static Vector2 Clamp(Vector2 center, Map map)
         {
-            Vector2 halfScreen = new Vector2(ScreenWidth / 2 / Zoom, ScreenHeight / 2 / Zoom);
+            Vector2 halfScreen = new Vector2(NativeScreenWidth / 2 / Zoom, NativeScreenHeight / 2 / Zoom);
             Vector2 bound = new Vector2(map.Width * map.TileSize, map.Height * map.TileSize) - halfScreen;
             return Vector2.Clamp(center, halfScreen,
                 bound);

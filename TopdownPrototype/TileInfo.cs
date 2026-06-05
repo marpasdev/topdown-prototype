@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace TopdownPrototype
 {
@@ -14,9 +14,10 @@ namespace TopdownPrototype
         public Point AtlasPosition { get; set; }
         //public string Name { get; set; }
         public bool Walkable { get; set; } = true;
-        // maybe move elsewhere later??
-        //public SoundEffect WalkingSound { get; set; }
+        // later add placing, breaking and walking sound
+        public SoundEffect PlacingSound { get; set; }
         public int Priority { get; set; }
+        public float Layer { get; set; }
 
     }
 }

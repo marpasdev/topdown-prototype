@@ -10,22 +10,17 @@ namespace TopdownPrototype
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        // resolution independency and borderless window
         private RenderTarget2D renderTarget;
-        // maybe too low - there are some visible off pixels
-        //private const int NATIVE_WIDTH = 1280;
-        //private const int NATIVE_HEIGHT = 720;
-        // it seems modifying the resolution also modifies the max and min zoom level
         private const int NATIVE_WIDTH = 1920;
         private const int NATIVE_HEIGHT = 1080;
+        private Point windowedSize = new Point(1280, 720);
         private Rectangle renderDestination;
         private bool isResizing;
         private bool isBorderless;
+        private Rectangle windowBounds;
 
         private KeyboardState previousKS;
-
         private Map map;
-
         private Player player;
 
         public TopdownPrototypeGame()
@@ -33,8 +28,8 @@ namespace TopdownPrototype
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = NATIVE_WIDTH;
-            graphics.PreferredBackBufferHeight = NATIVE_HEIGHT;
+            graphics.PreferredBackBufferWidth = windowedSize.X;
+            graphics.PreferredBackBufferHeight = windowedSize.Y;
             graphics.ApplyChanges();
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += OnResize;
@@ -42,8 +37,10 @@ namespace TopdownPrototype
 
         protected override void Initialize()
         {
-            Camera.ScreenWidth = graphics.PreferredBackBufferWidth;
-            Camera.ScreenHeight = graphics.PreferredBackBufferHeight;
+            Camera.ScreenWidth = windowedSize.X;
+            Camera.ScreenHeight = windowedSize.Y;
+            Camera.NativeScreenWidth = NATIVE_WIDTH;
+            Camera.NativeScreenHeight = NATIVE_HEIGHT;
 
             TileRegistry.Content = Content;
             WorldObjectRegistry.Content = Content;
@@ -64,9 +61,8 @@ namespace TopdownPrototype
 
             map = new Map(100, 100, 1);
 
-            player = new Player() {
-                Texture = Content.Load<Texture2D>("player")
-            };
+            player = new Player(Content.Load<Texture2D>("player"),
+                Content.Load<Texture2D>("player_anim_move_testpng"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -82,10 +78,11 @@ namespace TopdownPrototype
 
             previousKS = ks;
 
-            player.Update(gameTime, map);
+            player.Update(gameTime, map, new Point(renderDestination.X, renderDestination.Y));
 
-            Vector2 center = new Vector2(player.Position.X + player.Texture.Width / 2, 
-                player.Position.Y + player.Texture.Height / 2);
+            Vector2 center = new Vector2(player.Position.X + player.Width / 2,
+                player.Position.Y + player.Height / 2);
+
             Camera.Update(gameTime, center, map);
 
             base.Update(gameTime);
@@ -96,7 +93,7 @@ namespace TopdownPrototype
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, 
+            spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend, SamplerState.PointClamp,
                 null, null, null, Camera.Transform);
 
@@ -144,6 +141,7 @@ namespace TopdownPrototype
 
             if (isBorderless)
             {
+                windowBounds = Window.ClientBounds;
                 Window.IsBorderless = true;
                 graphics.IsFullScreen = false;
                 graphics.PreferredBackBufferWidth = display.Width;
@@ -154,17 +152,26 @@ namespace TopdownPrototype
             {
                 Window.IsBorderless = false;
                 graphics.IsFullScreen = false;
-                // TODO: fix
-                // currently out of order, needs to be fixed - native resolution is at fault
-                // too big for a window when back in fullscreen/window mode
-                graphics.PreferredBackBufferWidth = NATIVE_WIDTH;
-                graphics.PreferredBackBufferHeight = NATIVE_HEIGHT;
-                Window.Position = new Point((display.Width - NATIVE_WIDTH) / 2,
-                    (display.Height - NATIVE_HEIGHT) / 2);
+                graphics.PreferredBackBufferWidth = windowBounds.Width;
+                graphics.PreferredBackBufferHeight = windowBounds.Height;
+                Window.Position = new Point(windowBounds.X, windowBounds.Y);
             }
+            Camera.ScreenWidth = GraphicsDevice.Viewport.Width;
+            Camera.ScreenHeight = GraphicsDevice.Viewport.Height;
             graphics.ApplyChanges();
+            //CenterWindow();
 
             CalculateRenderDestination();
+        }
+
+        private void CenterWindow()
+        {
+            DisplayMode display = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
+
+            Window.Position = new Point(
+                (display.Width - GraphicsDevice.Viewport.Width) / 2,
+                (display.Height - GraphicsDevice.Viewport.Height) / 2
+                );
         }
 
         private void OnResize(object sender, EventArgs e)
@@ -174,8 +181,9 @@ namespace TopdownPrototype
                 isResizing = true;
                 CalculateRenderDestination();
                 isResizing = false;
+                Camera.ScreenWidth = GraphicsDevice.Viewport.Width;
+                Camera.ScreenHeight = GraphicsDevice.Viewport.Height;
             }
         }
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace TopdownPrototype
 {
@@ -50,7 +50,7 @@ namespace TopdownPrototype
             WorldObjects = new List<WorldObject>();
 
             WorldGenerator.Generate(this);
-          
+
             WorldObjects.Sort(new RenderOrderComparer());
 
             WorldGenerator.Autotile(this);
@@ -61,7 +61,7 @@ namespace TopdownPrototype
         private void DrawTile(SpriteBatch spriteBatch, int x, int y)
         {
             TileInfo info = TileRegistry.GetInfo((int)Grid[x, y]);
-            Vector2 offset;         
+            Vector2 offset;
             Vector2 leftCorner;     // left corner in the tileset
 
             // top left
@@ -99,16 +99,12 @@ namespace TopdownPrototype
                 TileSize, TileSize), Color.White);
         }
 
-        // TODO: get rid of playerPosition param
         public void Draw(SpriteBatch spriteBatch, Vector2 playerPosition, Player player)
         {
-            // render distance
-            // TODO: remove hardcoded values, maybe evaluate it based on the screen resolution etc.
-            // funny how this ended up being 16 by 9, I guess it's the aspect ratio after all
-            // this needs to update the values based on zoom level and the player's position
-            // if the player is in the world's corner, the radius needs to be bigger
-            int renderDistX = 32;
-            int renderDistY = 20;
+            int renderDistX = (int)(Camera.NativeScreenWidth / (TileSize * Camera.Zoom)) / 2 + 10;
+            int renderDistY = (int)(Camera.NativeScreenHeight / (TileSize * Camera.Zoom)) / 2 + 10;
+            // TODO: add render distance increment in corners
+
             Vector2 maxBound = new Vector2(Width, Height);
             Vector2 start = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 - renderDistX, playerPosition.Y / TileSize - renderDistX),
@@ -119,36 +115,53 @@ namespace TopdownPrototype
             Point playerPoint = new Point((int)(player.Feet.X / TileSize), (int)(player.Feet.Y / TileSize));
             playerPoint.X = Math.Clamp(playerPoint.X, 0, Width - 1);
             playerPoint.Y = Math.Clamp(playerPoint.Y, 0, Height - 1);
-            
-            // drawing tiles
+
+            var floorDrawQueue = new List<DrawTile>();
+
+            // moving floor tiles to draw queue
             for (int y = (int)start.Y; y < (int)end.Y; y++)
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
                 {
                     DrawTile(spriteBatch, x, y);
+                    floorDrawQueue.Add(new DrawTile()
+                    {
+                        Position = new Point(x, y),
+                        Layer = TileRegistry.GetInfo((int)Grid[x, y]).Layer
+                    });
                 }
+            }
+
+            floorDrawQueue.Sort((a, b) =>
+            {
+                return a.Layer.CompareTo(b.Layer);
+            });
+
+            for (int i = 0; i < floorDrawQueue.Count; i++)
+            {
+                DrawTile(spriteBatch, floorDrawQueue[i].Position.X, floorDrawQueue[i].Position.Y);
             }
 
             for (int y = (int)start.Y; y < (int)end.Y; y++)
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
                 {
-                    if (Elevation[x, y] > 0) 
+                    if (Elevation[x, y] > 0)
                     {
-                        // draw surface
-                        spriteBatch.Draw(TileRegistry.GetInfo((int)SurfaceGrid[Elevation[x, y] - 1, x, y]).Texture
-                            , TileSize * new Vector2(x, y - 1), Color.White);
+                        //// draw surface
+                        //spriteBatch.Draw(TileRegistry.GetInfo((int)SurfaceGrid[Elevation[x, y] - 1, x, y]).Texture
+                        //    , TileSize * new Vector2(x, y - 1), Color.White);
 
-                        // draw slope
-                        if (y != Height - 1)
-                        {
-                            if (Elevation[x, y + 1] < Elevation[x, y])
-                            {
-                                spriteBatch.Draw(TileRegistry.GetSlopeInfo((int)SlopeGrid[
-                                    Elevation[x, y] - 1, x, y])
-                                    .Texture, TileSize * new Vector2(x, y), Color.White);
-                            }
-                        }
+                        //// draw slope
+                        //if (y != Height - 1)
+                        //{
+                        //    if (Elevation[x, y + 1] < Elevation[x, y])
+                        //    {
+                        //        spriteBatch.Draw(TileRegistry.GetSlopeInfo((int)SlopeGrid[
+                        //            Elevation[x, y] - 1, x, y])
+                        //            .Texture, TileSize * new Vector2(x, y), Color.White);
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -165,7 +178,7 @@ namespace TopdownPrototype
                             {
                                 obj.Draw(spriteBatch, TileSize);
                             }
-                        } 
+                        }
                     }
 
                     playerPoint = new Point((int)(player.Feet.X / TileSize), (int)((player.Feet.Y - TileSize / 2) / TileSize));
@@ -176,5 +189,11 @@ namespace TopdownPrototype
                 }
             }
         }
+    }
+
+    internal class DrawTile
+    {
+        public Point Position;
+        public float Layer;
     }
 }

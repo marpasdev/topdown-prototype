@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace TopdownPrototype
 {
     internal static class WorldGenerator
     {
-
         public static void Generate(Map map)
-        {  
+        {
             // TODO: this is basic map generating - will be divided and improved later
             for (int y = 0; y < map.Height; y++)
             {
@@ -18,7 +17,7 @@ namespace TopdownPrototype
             }
 
             // make seed variable
-            FastNoiseLite noise = new FastNoiseLite();
+            FastNoiseLite noise = new FastNoiseLite(3);
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFractalType(FastNoiseLite.FractalType.FBm);
             noise.SetFractalOctaves(4);
@@ -55,22 +54,24 @@ namespace TopdownPrototype
                     }
                     else if (value > 0.8f && value <= 1.0f)
                     {
-                        map.Grid[x, y] = TileType.Stone;
-                        map.SlopeGrid[0, x, y] = SlopeType.Stone;
-                        map.Elevation[x, y] = 1;
-                        map.SurfaceGrid[0, x, y] = TileType.Gravel;
+                        //map.Grid[x, y] = TileType.Stone;
+                        //map.SlopeGrid[0, x, y] = SlopeType.Stone;
+                        //map.Elevation[x, y] = 1;
+                        //map.SurfaceGrid[0, x, y] = TileType.Gravel;
                     }
                 }
             }
 
             Random random = new Random();
 
-            for (int y = 10; y < map.Height - 10; y++)
+            for (int y = 0; y < map.Height; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
+                    if (y <= 10 && x <= 10) { continue; }
                     if (map.Grid[x, y] == TileType.Water) { continue; }
                     if (map.Grid[x, y] == TileType.Stone) { continue; }
+                    if (map.Grid[x, y] == TileType.Sand) { continue; }
 
                     int randInt = random.Next(40);
                     if (randInt >= 1 && randInt <= 5)
@@ -79,6 +80,13 @@ namespace TopdownPrototype
                         WorldObject tree = new WorldObject(new Point(x, y));
                         tree.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceTree);
                         tree.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+                    }
+                    else if (randInt > 5 && randInt <= 6)
+                    {
+                        if (map.Grid[x, y] == TileType.Sand) { continue; }
+                        WorldObject birch = new WorldObject(new Point(x, y));
+                        birch.Info = WorldObjectRegistry.GetInfo(6);
+                        birch.GetPlaced(map.OccupancyGrid, map.WorldObjects);
                     }
                     else if (randInt == 10)
                     {
@@ -104,52 +112,54 @@ namespace TopdownPrototype
 
         }
 
-        private static byte GetNeighborMask(Map map, int x, int y)
-        {
-            byte mask = 0;
-
-            
-
-            return mask;
-        }
-
         public static void Autotile(Map map)
         {
             for (int y = 0; y < map.Height; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
+                    //int priority = TileRegistry.GetInfo((int)map.Grid[x, y]).Priority;
+                    float layer = TileRegistry.GetInfo((int)map.Grid[x, y]).Layer;
+
                     // determining neighbors
                     bool n = false, s = false, w = false, e = false, nw = false, ne = false, sw = false, se = false;
-                    if (y > 0 && map.Grid[x, y - 1] == map.Grid[x, y])
+                    if (y > 0 && (map.Grid[x, y - 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x, y - 1]).Layer > layer))
                     {
                         n = true;
                     }
-                    if (x > 0 && map.Grid[x - 1, y] == map.Grid[x, y])
+                    if (x > 0 && (map.Grid[x - 1, y] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x - 1, y]).Layer > layer))
                     {
                         w = true;
                     }
-                    if (y > 0 && x > 0 && map.Grid[x - 1, y - 1] == map.Grid[x, y])
+                    if (y > 0 && x > 0 && (map.Grid[x - 1, y - 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x - 1, y - 1]).Layer > layer))
                     {
                         nw = true;
                     }
-                    if (y > 0 && x < map.Width - 1 && map.Grid[x + 1, y - 1] == map.Grid[x, y])
+                    if (y > 0 && x < map.Width - 1 && (map.Grid[x + 1, y - 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x + 1, y - 1]).Layer > layer))
                     {
                         ne = true;
                     }
-                    if (x > 0 && y < map.Height - 1 && map.Grid[x - 1, y + 1] == map.Grid[x, y])
+                    if (x > 0 && y < map.Height - 1 && (map.Grid[x - 1, y + 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x - 1, y + 1]).Layer > layer))
                     {
                         sw = true;
                     }
-                    if (y < map.Height - 1 && map.Grid[x, y + 1] == map.Grid[x, y])
+                    if (y < map.Height - 1 && (map.Grid[x, y + 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x, y + 1]).Layer > layer))
                     {
                         s = true;
                     }
-                    if (x < map.Width - 1 && map.Grid[x + 1, y] == map.Grid[x, y])
+                    if (x < map.Width - 1 && (map.Grid[x + 1, y] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x + 1, y]).Layer > layer))
                     {
                         e = true;
                     }
-                    if (x < map.Width - 1 && y < map.Height - 1 && map.Grid[x + 1, y + 1] == map.Grid[x, y])
+                    if (x < map.Width - 1 && y < map.Height - 1 && (map.Grid[x + 1, y + 1] == map.Grid[x, y] ||
+                        TileRegistry.GetInfo((int)map.Grid[x + 1, y + 1]).Layer > layer))
                     {
                         se = true;
                     }
@@ -349,7 +359,7 @@ namespace TopdownPrototype
                     else if (!s && sw && !w)
                     {
                         map.TerrainRenderGrid.BottomLeft[x, y].Variation = 14;
- 
+
                         if (map.Grid[x, y + 1] == map.Grid[x - 1, y] &&
                             TileRegistry.GetInfo((int)map.Grid[x, y + 1]).Priority > TileRegistry.GetInfo((int)map.Grid[x, y]).Priority)
                         {
@@ -384,7 +394,7 @@ namespace TopdownPrototype
                     }
                     else if (s && !se && !e)
                     {
-                    map.TerrainRenderGrid.BottomRight[x, y].Variation = 11;
+                        map.TerrainRenderGrid.BottomRight[x, y].Variation = 11;
                     }
                     else if (!s && se && !e)
                     {

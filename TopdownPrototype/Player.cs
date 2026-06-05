@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace TopdownPrototype
 {
@@ -24,7 +24,6 @@ namespace TopdownPrototype
         public Vector2 Feet => new Vector2(Position.X + 6, Position.Y + 27);
         // elevation of the player 
         private int elevation = 0;
-        public required Texture2D Texture { get; set; }
         private RectangleF collider;
         public RectangleF Collider
         {
@@ -42,10 +41,25 @@ namespace TopdownPrototype
         public float RunMultiplier { get; set; } = 1.5f;
         private int previousScrollValue = 0;
         private MouseState previousMouseState;
+        public Texture2D Texture { get; set; }
+        private AnimationManager animations;
+        private PlayerState previousState;
+        private PlayerState state;
+        public int Width { get; } = 14;
+        public int Height { get; } = 28;
 
-        public Player()
+
+        public Player(Texture2D texture, Texture2D walkingDownTexture)
         {
+            Texture = texture;
             Collider = new RectangleF(Position.X, 14 + Position.Y, 12, 14);
+            animations = new();
+            animations.Animations.Add("Idle", new Animation(Texture, 1, 5));
+            animations.Animations.Add("WalkingDown", new Animation(walkingDownTexture, 4, 0.15f));
+            animations.SwitchAnimation("Idle");
+            state = PlayerState.Idle;
+            previousState = PlayerState.Idle;
+
         }
 
         public void Move(float deltaTime, Map map)
@@ -80,7 +94,7 @@ namespace TopdownPrototype
 
             if (ks.IsKeyDown(Keys.LeftShift))
             {
-                speed *= RunMultiplier;   
+                speed *= RunMultiplier;
             }
 
             previousPosition = Position;
@@ -90,6 +104,16 @@ namespace TopdownPrototype
             previousPosition = Position;
             Position += new Vector2(0, direction.Y * speed * deltaTime);
             HandleWorldCollision(map, 'y');
+
+            previousState = state;
+            if (direction.Y > 0)
+            {
+                state = PlayerState.WalkingDown;
+            }
+            else
+            {
+                state = PlayerState.Idle;
+            }
         }
 
         private void Zoom(float deltaTime)
@@ -99,7 +123,8 @@ namespace TopdownPrototype
             if (ms.ScrollWheelValue > previousScrollValue)
             {
                 Camera.TargetZoom *= 1.1f;
-            } else if (ms.ScrollWheelValue < previousScrollValue)
+            }
+            else if (ms.ScrollWheelValue < previousScrollValue)
             {
                 Camera.TargetZoom /= 1.1f;
             }
@@ -152,7 +177,7 @@ namespace TopdownPrototype
                             }
                             return;
                         }
-                        if (Collider.Intersects(tileRect) && axis == 'y') 
+                        if (Collider.Intersects(tileRect) && axis == 'y')
                         {
                             if (velocity.Y > 0)
                             {
@@ -170,33 +195,48 @@ namespace TopdownPrototype
                 }
             }
         }
-        
-        public void Update(GameTime gameTime, Map map)
+
+        public void Update(GameTime gameTime, Map map, Point renderDestination)
         {
+            if (previousState == PlayerState.Idle && state == PlayerState.WalkingDown)
+            {
+                animations.SwitchAnimation("WalkingDown");
+            }
+            else if (previousState == PlayerState.WalkingDown && state == PlayerState.Idle)
+            {
+                animations.SwitchAnimation("Idle");
+            }
+
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Move(deltaTime, map);
+            animations.Update(gameTime);
+            Texture = animations.CurrentAnimation.Texture;
             Zoom(deltaTime);
             BoundPosition(map);
-            Interact(map);
+            Interact(map, renderDestination);
             previousMouseState = Mouse.GetState();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (Texture != null)
+            if (Texture is not null)
             {
-                spriteBatch.Draw(Texture, Position, Color.White);
+                spriteBatch.Draw(animations.CurrentAnimation.Texture, Position, animations.CurrentAnimation.SourceRectangle, Color.White);
             }
         }
 
         // testing purposes - rework later
-        public void Interact(Map map)
+        public void Interact(Map map, Point renderDestination)
         {
             MouseState ms = Mouse.GetState();
 
             if (ms.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
-                Vector2 worldPosition = Vector2.Transform(ms.Position.ToVector2(), Matrix.Invert(Camera.Transform));
+                //Vector2 screenPosition = ms.Position.ToVector2() - new Vector2(renderDestination.X, renderDestination.Y);
+                Vector2 screenPosition = Vector2.Transform(ms.Position.ToVector2(),
+                    Matrix.CreateScale((float)Camera.NativeScreenWidth / Camera.ScreenWidth,
+                    (float)Camera.NativeScreenHeight / Camera.ScreenHeight, 1));
+                Vector2 worldPosition = Vector2.Transform(screenPosition, Matrix.Invert(Camera.Transform));
 
                 Point gridPosition = new Point
                 (
@@ -206,11 +246,13 @@ namespace TopdownPrototype
 
                 if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Grass)
                 {
+                    TileRegistry.GetInfo((int)TileType.Sand).PlacingSound.Play();
                     map.Grid[gridPosition.X, gridPosition.Y] = TileType.Sand;
                     WorldGenerator.Autotile(map);
                 }
                 else if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Sand)
                 {
+                    TileRegistry.GetInfo((int)TileType.Grass).PlacingSound.Play();
                     map.Grid[gridPosition.X, gridPosition.Y] = TileType.Grass;
                     WorldGenerator.Autotile(map);
                 }
@@ -219,4 +261,11 @@ namespace TopdownPrototype
         }
 
     }
+
+    internal enum PlayerState
+    {
+        Idle,
+        WalkingDown
+    }
+
 }

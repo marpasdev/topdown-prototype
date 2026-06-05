@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace TopdownPrototype
@@ -17,7 +18,7 @@ namespace TopdownPrototype
         static TileRegistry()
         {
             tileInfo = new List<TileInfo>();
-            slopeInfo = new List<SlopeInfo>();    
+            slopeInfo = new List<SlopeInfo>();
         }
 
         public static void Load()
@@ -31,7 +32,8 @@ namespace TopdownPrototype
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("stone"),
-                AtlasPosition = Point.Zero
+                AtlasPosition = Point.Zero,
+                Layer = 1f
             });
             tileInfo.Add(new TileInfo()
             {
@@ -41,7 +43,10 @@ namespace TopdownPrototype
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("grass"),
-                AtlasPosition = new Point(128, 0)
+                AtlasPosition = new Point(128, 0),
+                PlacingSound = Content.Load<SoundEffect>("place"),
+                Priority = 0,
+                Layer = 3f
             });
             tileInfo.Add(new TileInfo()
             {
@@ -51,12 +56,16 @@ namespace TopdownPrototype
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("sand"),
-                AtlasPosition = new Point(64, 80)
+                AtlasPosition = new Point(64, 80),
+                PlacingSound = Content.Load<SoundEffect>("place"),
+                Priority = 1,
+                Layer = 2f
             });
             tileInfo.Add(new TileInfo()
             {
                 Texture = Content.Load<Texture2D>("water"),
-                AtlasPosition = new Point(128, 80)
+                AtlasPosition = new Point(128, 80),
+                Layer = 5f
             });
             /*
             tileInfo.Add(new TileInfo()
