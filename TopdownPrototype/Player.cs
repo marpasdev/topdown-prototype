@@ -55,7 +55,7 @@ namespace TopdownPrototype
             Collider = new RectangleF(Position.X, 14 + Position.Y, 12, 14);
             animations = new();
             animations.Animations.Add("Idle", new Animation(Texture, 1, 5));
-            animations.Animations.Add("WalkingDown", new Animation(walkingDownTexture, 4, 0.15f));
+            animations.Animations.Add("WalkingDown", new Animation(walkingDownTexture, 4, 0.09f));
             animations.SwitchAnimation("Idle");
             state = PlayerState.Idle;
             previousState = PlayerState.Idle;
@@ -233,16 +233,20 @@ namespace TopdownPrototype
             if (ms.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
                 //Vector2 screenPosition = ms.Position.ToVector2() - new Vector2(renderDestination.X, renderDestination.Y);
-                Vector2 screenPosition = Vector2.Transform(ms.Position.ToVector2(),
-                    Matrix.CreateScale((float)Camera.NativeScreenWidth / Camera.ScreenWidth,
-                    (float)Camera.NativeScreenHeight / Camera.ScreenHeight, 1));
-                Vector2 worldPosition = Vector2.Transform(screenPosition, Matrix.Invert(Camera.Transform));
+                //Vector2 screenPosition = Vector2.Transform(ms.Position.ToVector2(),
+                //    Matrix.CreateScale((float)Camera.NativeScreenWidth / Camera.ScreenWidth,
+                //    (float)Camera.NativeScreenHeight / Camera.ScreenHeight, 1));
+                //Vector2 worldPosition = Vector2.Transform(screenPosition, Matrix.Invert(Camera.Transform));
 
-                Point gridPosition = new Point
-                (
-                    MathHelper.Clamp((int)(worldPosition.X / map.TileSize), 0, map.Width - 1),
-                    MathHelper.Clamp((int)(worldPosition.Y / map.TileSize), 0, map.Height - 1)
-                );
+                //Point gridPosition = new Point
+                //(
+                //    MathHelper.Clamp((int)(worldPosition.X / map.TileSize), 0, map.Width - 1),
+                //    MathHelper.Clamp((int)(worldPosition.Y / map.TileSize), 0, map.Height - 1)
+                //);
+                Vector2? worldPosition = Camera.ConvertMouseToWorld(ms.Position);
+                if (worldPosition is null) { return; }
+
+                Point gridPosition = Camera.ConvertWorldToTile(worldPosition ?? Vector2.Zero);
 
                 if (map.Grid[gridPosition.X, gridPosition.Y] == TileType.Grass)
                 {

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace TopdownPrototype
 {
@@ -24,6 +23,8 @@ namespace TopdownPrototype
         public static int NativeScreenWidth { get; set; }
         public static int NativeScreenHeight { get; set; }
         private static float zoomSpeed = 100;
+        public static Rectangle Viewport { get; set; }
+        public static int TileSize { get; set; }
 
         private static Matrix CreateTranslation(Vector2 center)
         {
@@ -39,7 +40,7 @@ namespace TopdownPrototype
 
         private static void UpdateZoom(float deltaTime)
         {
-            Zoom = MathHelper.Lerp(Zoom, targetZoom, 0.1f * zoomSpeed * deltaTime);   
+            Zoom = MathHelper.Lerp(Zoom, targetZoom, 0.1f * zoomSpeed * deltaTime);
         }
 
         private static Vector2 Clamp(Vector2 center, Map map)
@@ -55,6 +56,30 @@ namespace TopdownPrototype
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             UpdateZoom(deltaTime);
             Transform = CreateZoom() * CreateTranslation(Clamp(center, map));
+        }
+
+        public static Vector2? ConvertMouseToWorld(Point mousePosition)
+        {
+            if (!Viewport.Contains(mousePosition))
+            {
+                return null;
+            }
+
+            Vector2 pos = new(
+                mousePosition.X - Viewport.X,
+                mousePosition.Y - Viewport.Y
+                );
+
+            pos.X *= (float)NativeScreenWidth / Viewport.Width;
+            pos.Y *= (float)NativeScreenHeight / Viewport.Height;
+
+            pos = Vector2.Transform(pos, Matrix.Invert(Transform));
+            return pos;
+        }
+
+        public static Point ConvertWorldToTile(Vector2 worldPosition)
+        {
+            return new Point((int)worldPosition.X / TileSize, (int)worldPosition.Y / TileSize);
         }
     }
 }

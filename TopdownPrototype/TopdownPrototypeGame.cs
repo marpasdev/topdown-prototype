@@ -41,6 +41,11 @@ namespace TopdownPrototype
             Camera.ScreenHeight = windowedSize.Y;
             Camera.NativeScreenWidth = NATIVE_WIDTH;
             Camera.NativeScreenHeight = NATIVE_HEIGHT;
+            Camera.Viewport = new(
+                0, 0,
+                windowedSize.X, windowedSize.Y
+                );
+            Camera.TileSize = 16;
 
             TileRegistry.Content = Content;
             WorldObjectRegistry.Content = Content;
@@ -131,6 +136,7 @@ namespace TopdownPrototype
             // pillar-boxing/letter-boxing
             renderDestination.X = (size.X - renderDestination.Width) / 2;
             renderDestination.Y = (size.Y - renderDestination.Height) / 2;
+            Camera.Viewport = renderDestination;
         }
 
         private void ToggleBorderless()
