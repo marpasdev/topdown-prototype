@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Rendering
 {
     public class AnimationManager
     {

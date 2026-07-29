@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace TopdownPrototype
+﻿namespace TopdownPrototype.Utils
 {
     // add other method that regular Rectangle class contains
     internal struct RectangleF

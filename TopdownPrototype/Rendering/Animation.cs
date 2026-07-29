@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Rendering
 {
     public class Animation
     {

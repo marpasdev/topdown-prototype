@@ -2,8 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using TopdownPrototype.Environment;
+using TopdownPrototype.Environment.Tiles;
+using TopdownPrototype.Rendering;
+using TopdownPrototype.Utils;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Entities
 {
     internal class Player
     {
@@ -137,7 +141,7 @@ namespace TopdownPrototype
         private void BoundPosition(Map map)
         {
             Position = Vector2.Clamp(Position, Vector2.Zero, map.TileSize * new Vector2(
-                map.Width, map.Height) - new Vector2(Texture.Width, Texture.Height));
+                map.Width, map.Length) - new Vector2(Texture.Width, Texture.Height));
         }
 
         private void HandleWorldCollision(Map map, char axis)
@@ -147,55 +151,55 @@ namespace TopdownPrototype
 
             int radius = 2;
             Point start = new Point(Math.Clamp(colliderTile.X - radius, 0, map.Width - 1),
-                Math.Clamp(colliderTile.Y - radius, 0, map.Height - 1));
+                Math.Clamp(colliderTile.Y - radius, 0, map.Length - 1));
             Point end = new Point(Math.Clamp(colliderTile.X + radius, 0, map.Width - 1),
-                Math.Clamp(colliderTile.Y + radius, 0, map.Height - 1));
+                Math.Clamp(colliderTile.Y + radius, 0, map.Length - 1));
 
             Vector2 velocity = Position - previousPosition;
 
-            // elevation
-            for (int y = start.Y; y <= end.Y; y++)
-            {
-                for (int x = start.X; x <= end.X; x++)
-                {
-                    // will this certainly not cause any strange behaviour regarding null here??
-                    if (map.Elevation[x, y] != elevation || (map.OccupancyGrid[x, y] != null &&
-                        !map.OccupancyGrid[x, y].Info.Walkable))
-                    {
-                        RectangleF tileRect = new RectangleF(x * map.TileSize, y * map.TileSize,
-                            map.TileSize, map.TileSize);
+            //// elevation
+            //for (int y = start.Y; y <= end.Y; y++)
+            //{
+            //    for (int x = start.X; x <= end.X; x++)
+            //    {
+            //        // will this certainly not cause any strange behaviour regarding null here??
+            //        if (map.Elevation[x, y] != elevation || (map.OccupancyGrid[x, y] != null &&
+            //            !map.OccupancyGrid[x, y].Info.Walkable))
+            //        {
+            //            RectangleF tileRect = new RectangleF(x * map.TileSize, y * map.TileSize,
+            //                map.TileSize, map.TileSize);
 
-                        if (Collider.Intersects(tileRect) && axis == 'x')
-                        {
-                            if (velocity.X > 0)
-                            {
-                                Collider = new RectangleF(tileRect.Left - Collider.Width, Collider.Y, Collider.Width,
-                                         Collider.Height);
-                            }
-                            else if (velocity.X < 0)
-                            {
-                                Collider = new RectangleF(tileRect.Right, Collider.Y, Collider.Width,
-                                         Collider.Height);
-                            }
-                            return;
-                        }
-                        if (Collider.Intersects(tileRect) && axis == 'y')
-                        {
-                            if (velocity.Y > 0)
-                            {
-                                Collider = new RectangleF(Collider.X, tileRect.Top - Collider.Height, Collider.Width,
-                                         Collider.Height);
-                            }
-                            else if (velocity.Y < 0)
-                            {
-                                Collider = new RectangleF(Collider.X, tileRect.Bottom, Collider.Width,
-                                    Collider.Height);
-                            }
-                            return;
-                        }
-                    }
-                }
-            }
+            //            if (Collider.Intersects(tileRect) && axis == 'x')
+            //            {
+            //                if (velocity.X > 0)
+            //                {
+            //                    Collider = new RectangleF(tileRect.Left - Collider.Width, Collider.Y, Collider.Width,
+            //                             Collider.Height);
+            //                }
+            //                else if (velocity.X < 0)
+            //                {
+            //                    Collider = new RectangleF(tileRect.Right, Collider.Y, Collider.Width,
+            //                             Collider.Height);
+            //                }
+            //                return;
+            //            }
+            //            if (Collider.Intersects(tileRect) && axis == 'y')
+            //            {
+            //                if (velocity.Y > 0)
+            //                {
+            //                    Collider = new RectangleF(Collider.X, tileRect.Top - Collider.Height, Collider.Width,
+            //                             Collider.Height);
+            //                }
+            //                else if (velocity.Y < 0)
+            //                {
+            //                    Collider = new RectangleF(Collider.X, tileRect.Bottom, Collider.Width,
+            //                        Collider.Height);
+            //                }
+            //                return;
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         public void Update(GameTime gameTime, Map map, Point renderDestination)

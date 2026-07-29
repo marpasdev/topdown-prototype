@@ -2,8 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using TopdownPrototype.Entities;
+using TopdownPrototype.Environment;
+using TopdownPrototype.Environment.Tiles;
+using TopdownPrototype.Environment.WorldObjects;
+using TopdownPrototype.Rendering;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Core
 {
     public class TopdownPrototypeGame : Game
     {
@@ -73,7 +78,6 @@ namespace TopdownPrototype
             testFont = Content.Load<SpriteFont>("testFont");
 
             TileRegistry.Load();
-            TileRegistry.LoadSlopes();
             WorldObjectRegistry.Load();
 
             map = new Map(100, 100, 1);
@@ -141,9 +145,13 @@ namespace TopdownPrototype
             if (isTestMode)
             {
                 spriteBatch.DrawString(testFont, $"FPS: {fps}",
-                    new Vector2(0, 0), Color.Red);
+                    new Vector2(0, 0), Color.Black);
                 spriteBatch.DrawString(testFont, $"SelectedTile: {player.SelectedTileType.ToString()}",
-                    new Vector2(0, 20), Color.Red);
+                    new Vector2(0, 20), Color.Black);
+                spriteBatch.DrawString(testFont, $"X: {player.Position.X / 16}",
+                    new Vector2(0, 40), Color.Red);
+                spriteBatch.DrawString(testFont, $"Y: {player.Position.Y / 16}",
+                    new Vector2(0, 60), Color.Blue);
             }
 
             spriteBatch.End();

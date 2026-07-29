@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using TopdownPrototype.Environment;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Rendering
 {
     internal static class Camera
     {
@@ -46,7 +47,7 @@ namespace TopdownPrototype
         private static Vector2 Clamp(Vector2 center, Map map)
         {
             Vector2 halfScreen = new Vector2(NativeScreenWidth / 2 / Zoom, NativeScreenHeight / 2 / Zoom);
-            Vector2 bound = new Vector2(map.Width * map.TileSize, map.Height * map.TileSize) - halfScreen;
+            Vector2 bound = new Vector2(map.Width * map.TileSize, map.Length * map.TileSize) - halfScreen;
             return Vector2.Clamp(center, halfScreen,
                 bound);
         }

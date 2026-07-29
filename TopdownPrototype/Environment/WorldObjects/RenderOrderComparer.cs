@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Environment.WorldObjects
 {
     internal class RenderOrderComparer : IComparer<WorldObject>
     {
@@ -10,7 +10,8 @@ namespace TopdownPrototype
             if (yComparison == 0)
             {
                 return obj1.AnchorTile.X.CompareTo(obj2.AnchorTile.X);
-            } else
+            }
+            else
             {
                 return yComparison;
             }

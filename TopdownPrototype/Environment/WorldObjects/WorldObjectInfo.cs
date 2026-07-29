@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Environment.WorldObjects
 {
     internal class WorldObjectInfo
     {

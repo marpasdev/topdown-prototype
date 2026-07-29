@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TopdownPrototype
+﻿namespace TopdownPrototype.Environment.WorldObjects
 {
     // change to short later
     internal enum WorldObjectType : byte

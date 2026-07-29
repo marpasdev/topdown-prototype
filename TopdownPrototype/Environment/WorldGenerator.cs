@@ -1,14 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using TopdownPrototype.Environment.Tiles;
+using TopdownPrototype.Environment.WorldObjects;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Environment
 {
     internal static class WorldGenerator
     {
         public static void Generate(Map map)
         {
             // TODO: this is basic map generating - will be divided and improved later
-            for (int y = 0; y < map.Height; y++)
+            for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
@@ -17,15 +19,15 @@ namespace TopdownPrototype
             }
 
             // make seed variable
-            FastNoiseLite noise = new FastNoiseLite(3);
+            FastNoiseLite noise = new FastNoiseLite();
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFractalType(FastNoiseLite.FractalType.FBm);
             noise.SetFractalOctaves(4);
             noise.SetFrequency(0.02f);
 
-            float[,] noiseMap = new float[map.Width, map.Height];
+            float[,] noiseMap = new float[map.Width, map.Length];
 
-            for (int y = 0; y < map.Height; y++)
+            for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
@@ -35,7 +37,7 @@ namespace TopdownPrototype
                 }
             }
 
-            for (int y = 0; y < map.Height; y++)
+            for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
@@ -64,7 +66,7 @@ namespace TopdownPrototype
 
             Random random = new Random();
 
-            for (int y = 0; y < map.Height; y++)
+            for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
@@ -114,7 +116,7 @@ namespace TopdownPrototype
 
         public static void Autotile(Map map)
         {
-            for (int y = 0; y < map.Height; y++)
+            for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map.Width; x++)
                 {
@@ -143,12 +145,12 @@ namespace TopdownPrototype
                     {
                         ne = true;
                     }
-                    if (x > 0 && y < map.Height - 1 && (map.Grid[x - 1, y + 1] == map.Grid[x, y] ||
+                    if (x > 0 && y < map.Length - 1 && (map.Grid[x - 1, y + 1] == map.Grid[x, y] ||
                         TileRegistry.GetInfo((int)map.Grid[x - 1, y + 1]).Layer > layer))
                     {
                         sw = true;
                     }
-                    if (y < map.Height - 1 && (map.Grid[x, y + 1] == map.Grid[x, y] ||
+                    if (y < map.Length - 1 && (map.Grid[x, y + 1] == map.Grid[x, y] ||
                         TileRegistry.GetInfo((int)map.Grid[x, y + 1]).Layer > layer))
                     {
                         s = true;
@@ -158,7 +160,7 @@ namespace TopdownPrototype
                     {
                         e = true;
                     }
-                    if (x < map.Width - 1 && y < map.Height - 1 && (map.Grid[x + 1, y + 1] == map.Grid[x, y] ||
+                    if (x < map.Width - 1 && y < map.Length - 1 && (map.Grid[x + 1, y + 1] == map.Grid[x, y] ||
                         TileRegistry.GetInfo((int)map.Grid[x + 1, y + 1]).Layer > layer))
                     {
                         se = true;
@@ -176,7 +178,7 @@ namespace TopdownPrototype
                             }
                         }
 
-                        if (y < map.Height - 1)
+                        if (y < map.Length - 1)
                         {
                             if (map.Grid[x, y + 1] == map.Grid[x, y])
                             {
@@ -184,7 +186,7 @@ namespace TopdownPrototype
                             }
 
                         }
-                        if (y == map.Height - 1)
+                        if (y == map.Length - 1)
                         {
                             sw = true;
                         }
@@ -222,7 +224,7 @@ namespace TopdownPrototype
                                 ne = true;
                             }
                         }
-                        if (y < map.Height - 1)
+                        if (y < map.Length - 1)
                         {
                             if (map.Grid[x, y + 1] == map.Grid[x, y])
                             {
@@ -230,7 +232,7 @@ namespace TopdownPrototype
                             }
 
                         }
-                        if (y == map.Height - 1)
+                        if (y == map.Length - 1)
                         {
                             se = true;
                         }
@@ -240,7 +242,7 @@ namespace TopdownPrototype
                         }
                     }
 
-                    if (y == map.Height - 1)
+                    if (y == map.Length - 1)
                     {
                         s = true;
                         if (x > 0)

@@ -1,6 +1,7 @@
 ﻿using System;
+using TopdownPrototype.Environment.Tiles;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Environment
 {
     internal class GroundRenderGrid
     {

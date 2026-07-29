@@ -2,26 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using TopdownPrototype.Entities;
+using TopdownPrototype.Environment.Tiles;
+using TopdownPrototype.Environment.WorldObjects;
+using TopdownPrototype.Rendering;
 
-namespace TopdownPrototype
+namespace TopdownPrototype.Environment
 {
     internal class Map
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
-        // 32 pixelart looks stunning, maybe go with that in the future?
+        public int Width { get; set; } = 1024;
+        public int Length { get; set; } = 1024;
+        public int Height { get; set; } = 32;
         public int TileSize { get; set; } = 16;
-        // maybe rename to Tiles or TileGrid?
+        // add third dimension
         public TileType[,] Grid { get; set; }
-        //***** elevation - slopes and surfaces *****
-        // format: [level, x, y]
-        // would changing it to [x, y, z] be a reasonable thing?
-        // maximum number of elevation levels
-        public int MaxLevels { get; set; }
-        // maybe merge with TileGrid later? Or possibly let it be this way, to be compatible with slopes
-        public TileType[,,] SurfaceGrid { get; set; }
-        // grid storing the type of elevated slope
-        public SlopeType[,,] SlopeGrid { get; set; }
         // stores the top elevation for each coordinate
         public int[,] Elevation { get; private set; }
         public WorldObject[,] OccupancyGrid { get; set; }
@@ -29,23 +24,15 @@ namespace TopdownPrototype
         // rename this
         public GroundRenderGrid TerrainRenderGrid { get; set; }
 
-        public Map(int width, int height, int maxElevationLevels)
+        public Map(int width, int length, int maxElevationLevels)
         {
             Width = width;
-            Height = height;
-            Grid = new TileType[width, height];
-            TerrainRenderGrid = new GroundRenderGrid(width, height);
-
-            // replace the hardcoded number at the end with something else
-            maxElevationLevels = Math.Clamp(maxElevationLevels, 0, 10);
-            MaxLevels = maxElevationLevels;
-
-            SurfaceGrid = new TileType[MaxLevels, Width, Height];
-            SlopeGrid = new SlopeType[MaxLevels, Width, Height];
-            Elevation = new int[Width, Height];
+            Length = length;
+            Grid = new TileType[width, length];
+            TerrainRenderGrid = new GroundRenderGrid(width, length);
 
             // assuming this defaults to null
-            OccupancyGrid = new WorldObject[width, height];
+            OccupancyGrid = new WorldObject[width, length];
 
             WorldObjects = new List<WorldObject>();
 
@@ -54,7 +41,6 @@ namespace TopdownPrototype
             WorldObjects.Sort(new RenderOrderComparer());
 
             WorldGenerator.Autotile(this);
-
         }
 
         // works with dual grid
@@ -105,7 +91,7 @@ namespace TopdownPrototype
             int renderDistY = (int)(Camera.NativeScreenHeight / (TileSize * Camera.Zoom)) / 2 + 10;
             // TODO: add render distance increment in corners
 
-            Vector2 maxBound = new Vector2(Width, Height);
+            Vector2 maxBound = new Vector2(Width, Length);
             Vector2 start = Vector2.Clamp(new Vector2(playerPosition.X / TileSize
                 - renderDistX, playerPosition.Y / TileSize - renderDistX),
                 Vector2.Zero, maxBound);
@@ -114,7 +100,7 @@ namespace TopdownPrototype
                 Vector2.Zero, maxBound);
             Point playerPoint = new Point((int)(player.Feet.X / TileSize), (int)(player.Feet.Y / TileSize));
             playerPoint.X = Math.Clamp(playerPoint.X, 0, Width - 1);
-            playerPoint.Y = Math.Clamp(playerPoint.Y, 0, Height - 1);
+            playerPoint.Y = Math.Clamp(playerPoint.Y, 0, Length - 1);
 
             var floorDrawQueue = new List<DrawTile>();
 
@@ -146,38 +132,12 @@ namespace TopdownPrototype
             {
                 for (int x = (int)start.X; x < (int)end.X; x++)
                 {
-                    if (Elevation[x, y] > 0)
+                    WorldObject obj = OccupancyGrid[x, y];
+                    if (obj != null)
                     {
-                        //// draw surface
-                        //spriteBatch.Draw(TileRegistry.GetInfo((int)SurfaceGrid[Elevation[x, y] - 1, x, y]).Texture
-                        //    , TileSize * new Vector2(x, y - 1), Color.White);
-
-                        //// draw slope
-                        //if (y != Height - 1)
-                        //{
-                        //    if (Elevation[x, y + 1] < Elevation[x, y])
-                        //    {
-                        //        spriteBatch.Draw(TileRegistry.GetSlopeInfo((int)SlopeGrid[
-                        //            Elevation[x, y] - 1, x, y])
-                        //            .Texture, TileSize * new Vector2(x, y), Color.White);
-                        //    }
-                        //}
-                    }
-                    else
-                    {
-                        //spriteBatch.Draw(TileRegistry.GetInfo((int)Grid[x, y]).Texture
-                        //    , TileSize * new Vector2(x, y), Color.White);
-                        //DrawTile(spriteBatch, x, y);
-
-                        // world objects
-                        // TODO: needs to be moved alongside elevation, otherwise it will be drawn on top of
-                        WorldObject obj = OccupancyGrid[x, y];
-                        if (obj != null)
+                        if (obj.LeftmostTile == new Point(x, y))
                         {
-                            if (obj.LeftmostTile == new Point(x, y))
-                            {
-                                obj.Draw(spriteBatch, TileSize);
-                            }
+                            obj.Draw(spriteBatch, TileSize);
                         }
                     }
 
