@@ -35,7 +35,7 @@ namespace TopdownPrototype.Environment.WorldObjects
             WorldObjectInfo spruce = new WorldObjectInfo(2)
             {
                 Texture = Content.Load<Texture2D>("spruce"),
-                DrawOffset = new Vector2(-1, -4),
+                DrawOffset = new Vector2(-1, -5),
                 LeftmostTile = new Point(0, 0)
             };
             worldObjectInfo.Add(spruce);
@@ -71,6 +71,30 @@ namespace TopdownPrototype.Environment.WorldObjects
                 LeftmostTile = new Point(0, 0)
             };
             worldObjectInfo.Add(birch);
+
+            WorldObjectInfo spruceStump = new WorldObjectInfo(7)
+            {
+                Texture = Content.Load<Texture2D>("spruce_stump"),
+                Walkable = false
+            };
+
+            worldObjectInfo.Add(spruceStump);
+
+            WorldObjectInfo stoneSmall = new WorldObjectInfo(8)
+            {
+                Texture = Content.Load<Texture2D>("stone_small"),
+                Walkable = false
+            };
+
+            worldObjectInfo.Add(stoneSmall);
+
+            WorldObjectInfo daisies = new WorldObjectInfo(9)
+            {
+                Texture = Content.Load<Texture2D>("daisies"),
+                Walkable = true
+            };
+
+            worldObjectInfo.Add(daisies);
         }
 
         public static WorldObjectInfo GetInfo(int worldObjectID)

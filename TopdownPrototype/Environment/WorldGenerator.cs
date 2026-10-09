@@ -56,10 +56,7 @@ namespace TopdownPrototype.Environment
                     }
                     else if (value > 0.8f && value <= 1.0f)
                     {
-                        //map.Grid[x, y] = TileType.Stone;
-                        //map.SlopeGrid[0, x, y] = SlopeType.Stone;
-                        //map.Elevation[x, y] = 1;
-                        //map.SurfaceGrid[0, x, y] = TileType.Gravel;
+                        map.Grid[x, y] = TileType.Dirt;
                     }
                 }
             }
@@ -76,12 +73,23 @@ namespace TopdownPrototype.Environment
                     if (map.Grid[x, y] == TileType.Sand) { continue; }
 
                     int randInt = random.Next(40);
-                    if (randInt >= 1 && randInt <= 5)
+                    if (randInt >= 1 && randInt <= 4)
                     {
+
                         if (map.Grid[x, y] == TileType.Sand) { continue; }
+
                         WorldObject tree = new WorldObject(new Point(x, y));
                         tree.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceTree);
                         tree.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+
+                    }
+                    else if (randInt == 5)
+                    {
+                        if (map.Grid[x, y] == TileType.Sand) { continue; }
+
+                        WorldObject spruceStump = new WorldObject(new Point(x, y));
+                        spruceStump.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.SpruceStump);
+                        spruceStump.GetPlaced(map.OccupancyGrid, map.WorldObjects);
                     }
                     else if (randInt > 5 && randInt <= 6)
                     {
@@ -107,6 +115,18 @@ namespace TopdownPrototype.Environment
                         WorldObject flyAmanita = new WorldObject(new Point(x, y));
                         flyAmanita.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.FlyAmanita);
                         flyAmanita.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+                    }
+                    else if (randInt == 13)
+                    {
+                        WorldObject smallStone = new WorldObject(new Point(x, y));
+                        smallStone.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.StoneSmall);
+                        smallStone.GetPlaced(map.OccupancyGrid, map.WorldObjects);
+                    }
+                    else if (randInt == 14)
+                    {
+                        WorldObject daisies = new WorldObject(new Point(x, y));
+                        daisies.Info = WorldObjectRegistry.GetInfo((int)WorldObjectType.Daisies);
+                        daisies.GetPlaced(map.OccupancyGrid, map.WorldObjects);
                     }
                 }
             }
@@ -283,7 +303,7 @@ namespace TopdownPrototype.Environment
                         map.TerrainRenderGrid.TopLeft[x, y].Variation = 4;
 
                         if (map.Grid[x - 1, y] == map.Grid[x, y - 1] &&
-                            TileRegistry.GetInfo((int)map.Grid[x, y - 1]).Priority > TileRegistry.GetInfo((int)map.Grid[x, y]).Priority)
+                            TileRegistry.GetInfo((int)map.Grid[x, y - 1]).ConnectPriority > TileRegistry.GetInfo((int)map.Grid[x, y]).ConnectPriority)
                         {
                             map.TerrainRenderGrid.TopLeft[x, y].Variation = 13;
                         }
@@ -323,7 +343,7 @@ namespace TopdownPrototype.Environment
                         map.TerrainRenderGrid.TopRight[x, y].Variation = 14;
 
                         if (map.Grid[x, y - 1] == map.Grid[x + 1, y] &&
-                            TileRegistry.GetInfo((int)map.Grid[x, y - 1]).Priority > TileRegistry.GetInfo((int)map.Grid[x, y]).Priority)
+                            TileRegistry.GetInfo((int)map.Grid[x, y - 1]).ConnectPriority > TileRegistry.GetInfo((int)map.Grid[x, y]).ConnectPriority)
                         {
                             map.TerrainRenderGrid.TopRight[x, y].Variation = 0;
                         }
@@ -363,7 +383,7 @@ namespace TopdownPrototype.Environment
                         map.TerrainRenderGrid.BottomLeft[x, y].Variation = 14;
 
                         if (map.Grid[x, y + 1] == map.Grid[x - 1, y] &&
-                            TileRegistry.GetInfo((int)map.Grid[x, y + 1]).Priority > TileRegistry.GetInfo((int)map.Grid[x, y]).Priority)
+                            TileRegistry.GetInfo((int)map.Grid[x, y + 1]).ConnectPriority > TileRegistry.GetInfo((int)map.Grid[x, y]).ConnectPriority)
                         {
                             map.TerrainRenderGrid.BottomLeft[x, y].Variation = 8;
                         }
@@ -403,7 +423,7 @@ namespace TopdownPrototype.Environment
                         map.TerrainRenderGrid.BottomRight[x, y].Variation = 4;
 
                         if (map.Grid[x, y + 1] == map.Grid[x + 1, y] &&
-                            TileRegistry.GetInfo((int)map.Grid[x, y + 1]).Priority > TileRegistry.GetInfo((int)map.Grid[x, y]).Priority)
+                            TileRegistry.GetInfo((int)map.Grid[x, y + 1]).ConnectPriority > TileRegistry.GetInfo((int)map.Grid[x, y]).ConnectPriority)
                         {
                             map.TerrainRenderGrid.BottomRight[x, y].Variation = 15;
                         }

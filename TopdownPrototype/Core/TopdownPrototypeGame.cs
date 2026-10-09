@@ -99,7 +99,7 @@ namespace TopdownPrototype.Core
 
             previousKS = ks;
 
-            player.Update(gameTime, map, new Point(renderDestination.X, renderDestination.Y));
+            player.Update(gameTime, map, new Point(renderDestination.X, renderDestination.Y), this);
 
             Vector2 center = new Vector2(player.Position.X + player.Width / 2,
                 player.Position.Y + player.Height / 2);

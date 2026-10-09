@@ -41,6 +41,7 @@ namespace TopdownPrototype.Entities
                 position = new Vector2(collider.X, collider.Y - 14);
             }
         }
+        private Vector2 Velocity { get; set; }
         public float Speed { get; set; } = 50f;
         public float RunMultiplier { get; set; } = 1.5f;
         private int previousScrollValue = 0;
@@ -103,13 +104,28 @@ namespace TopdownPrototype.Entities
                 speed *= RunMultiplier;
             }
 
+            if (direction.X != 0)
+            {
+                Velocity = new Vector2(direction.X * speed, Velocity.Y);
+            }
+            if (direction.Y != 0)
+            {
+                Velocity = new Vector2(Velocity.X, direction.Y * speed);
+            }
+
             previousPosition = Position;
-            Position += new Vector2(direction.X * speed * deltaTime, 0);
+
+            Position = new Vector2(Position.X + Velocity.X * deltaTime, Position.Y);
             HandleWorldCollision(map, 'x');
 
             previousPosition = Position;
-            Position += new Vector2(0, direction.Y * speed * deltaTime);
+            Position = new Vector2(Position.X, Position.Y + Velocity.Y * deltaTime);
             HandleWorldCollision(map, 'y');
+
+            if (Velocity.LengthSquared() >= 0)
+            {
+                Velocity *= 0.8f;
+            }
 
             previousState = state;
             if (direction.Y > 0)
@@ -202,11 +218,11 @@ namespace TopdownPrototype.Entities
             //}
         }
 
-        public void Update(GameTime gameTime, Map map, Point renderDestination)
+        public void Update(GameTime gameTime, Map map, Point renderDestination, Game game)
         {
             if (previousState == PlayerState.Idle && state == PlayerState.WalkingDown)
             {
-                animations.SwitchAnimation("WalkingDown");
+                //animations.SwitchAnimation("WalkingDown");
             }
             else if (previousState == PlayerState.WalkingDown && state == PlayerState.Idle)
             {
@@ -219,7 +235,7 @@ namespace TopdownPrototype.Entities
             Texture = animations.CurrentAnimation.Texture;
             Zoom(deltaTime);
             BoundPosition(map);
-            Interact(map, renderDestination);
+            Interact(map, renderDestination, game);
             SwitchSelectedTileType();
             previousMouseState = Mouse.GetState();
             previousKeyboardState = Keyboard.GetState();
@@ -234,8 +250,9 @@ namespace TopdownPrototype.Entities
         }
 
         // testing purposes - rework later
-        public void Interact(Map map, Point renderDestination)
+        public void Interact(Map map, Point renderDestination, Game game)
         {
+            if (!game.IsActive) { return; }
             MouseState ms = Mouse.GetState();
 
             if (ms.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
@@ -268,11 +285,13 @@ namespace TopdownPrototype.Entities
                 //    map.Grid[gridPosition.X, gridPosition.Y] = TileType.Grass;
                 //    WorldGenerator.Autotile(map);
                 //}
-                TileRegistry.GetInfo((int)SelectedTileType).PlacingSound?.Play();
+                if (map.Grid[gridPosition.X, gridPosition.Y] != SelectedTileType)
+                {
+                    TileRegistry.GetInfo((int)SelectedTileType).PlacementSound?.Play();
+                }
                 map.Grid[gridPosition.X, gridPosition.Y] = SelectedTileType;
                 WorldGenerator.Autotile(map);
             }
-
         }
 
         private void SwitchSelectedTileType()
@@ -284,13 +303,13 @@ namespace TopdownPrototype.Entities
                 value++;
                 if (value >= Enum.GetValues<TileType>().Length)
                 {
-                    value = 0;
+                    value = 1;
                 }
             }
             else if (ks.IsKeyDown(Keys.Left) && !previousKeyboardState.IsKeyDown(Keys.Left))
             {
                 value--;
-                if (value < 0)
+                if (value < 1)
                 {
                     value = Enum.GetValues<TileType>().Length - 1;
                 }

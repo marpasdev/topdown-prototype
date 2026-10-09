@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace TopdownPrototype.Environment.Tiles
 {
-    // merge with worldobject registry?
     public static class TileRegistry
     {
-        // maybe give it a better name?
+        // TODO: better name
         private static List<TileInfo> tileInfo;
         public static ContentManager Content { get; set; }
+        // restructure
         public static Texture2D Atlas { get; set; }
 
         static TileRegistry()
@@ -19,45 +19,57 @@ namespace TopdownPrototype.Environment.Tiles
             tileInfo = new List<TileInfo>();
         }
 
+        // TODO: load from file?
         public static void Load()
         {
             Atlas = Content.Load<Texture2D>("tile_atlas");
 
+            // void
             tileInfo.Add(new TileInfo());
+            // currently no way to identify the tile
             tileInfo.Add(new TileInfo()
             {
                 AtlasPosition = Point.Zero,
-                Layer = 1f
+                Layer = 5f,
+                // move to sound bank, reuse shared sounds
+                PlacementSound = Content.Load<SoundEffect>("stone_place")
+                // include priority everywhere
             });
             tileInfo.Add(new TileInfo()
             {
-                AtlasPosition = new Point(64, 0)
+                AtlasPosition = new Point(64, 0),
+                PlacementSound = Content.Load<SoundEffect>("place"),
+                Layer = 6f
             });
             tileInfo.Add(new TileInfo()
             {
                 AtlasPosition = new Point(128, 0),
-                PlacingSound = Content.Load<SoundEffect>("place"),
-                Priority = 0,
-                Layer = 4f
+                PlacementSound = Content.Load<SoundEffect>("place"),
+                ConnectPriority = 0,
+                Layer = 7f
             });
             tileInfo.Add(new TileInfo()
             {
-                AtlasPosition = new Point(0, 80)
-            });
-            tileInfo.Add(new TileInfo()
-            {
-                AtlasPosition = new Point(64, 80),
-                PlacingSound = Content.Load<SoundEffect>("place"),
-                Priority = 1,
+                AtlasPosition = new Point(0, 80),
+                PlacementSound = Content.Load<SoundEffect>("gravel_place"),
                 Layer = 2f
             });
             tileInfo.Add(new TileInfo()
             {
-                AtlasPosition = new Point(128, 80),
+                AtlasPosition = new Point(64, 80),
+                PlacementSound = Content.Load<SoundEffect>("place"),
+                ConnectPriority = 1,
                 Layer = 3f
+            });
+            tileInfo.Add(new TileInfo()
+            {
+                AtlasPosition = new Point(128, 80),
+                Layer = 4f,
+                PlacementSound = Content.Load<SoundEffect>("water_splash")
             });
         }
 
+        // use TileType instead
         public static TileInfo GetInfo(int tileID)
         {
             return tileInfo[tileID];

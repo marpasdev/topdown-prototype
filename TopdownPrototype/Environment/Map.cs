@@ -18,7 +18,6 @@ namespace TopdownPrototype.Environment
         // add third dimension
         public TileType[,] Grid { get; set; }
         // stores the top elevation for each coordinate
-        public int[,] Elevation { get; private set; }
         public WorldObject[,] OccupancyGrid { get; set; }
         public List<WorldObject> WorldObjects { get; set; }
         // rename this
@@ -133,7 +132,7 @@ namespace TopdownPrototype.Environment
                 for (int x = (int)start.X; x < (int)end.X; x++)
                 {
                     WorldObject obj = OccupancyGrid[x, y];
-                    if (obj != null)
+                    if (obj is not null)
                     {
                         if (obj.LeftmostTile == new Point(x, y))
                         {

@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:birch.png
 
+#begin daisies.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:daisies.png
+
 #begin dirt_slope.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,6 +84,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:grass.png
+
+#begin gravel_place.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gravel_place.wav
 
 #begin gravel.png
 /importer:TextureImporter
@@ -175,6 +193,18 @@
 /processorParam:TextureFormat=Color
 /build:sand.png
 
+#begin spruce_stump.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spruce_stump.png
+
 #begin spruce.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -199,6 +229,12 @@
 /processorParam:TextureFormat=Color
 /build:stone_large.png
 
+#begin stone_place.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:stone_place.wav
+
 #begin stone_slope.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -210,6 +246,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:stone_slope.png
+
+#begin stone_small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:stone_small.png
 
 #begin stone.png
 /importer:TextureImporter
@@ -241,6 +289,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tile_atlas.png
+
+#begin tile_atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tile_atlas.png
+
+#begin water_splash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:water_splash.wav
 
 #begin water.png
 /importer:TextureImporter
